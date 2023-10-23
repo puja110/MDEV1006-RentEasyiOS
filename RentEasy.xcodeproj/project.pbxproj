@@ -15,6 +15,8 @@
 		3D5FDBC92ADF8E4E0059E022 /* RentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D5FDBC72ADF8E4E0059E022 /* RentCell.xib */; };
 		3D778F922AE2ED0E009085EC /* Button_FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D778F912AE2ED0E009085EC /* Button_FieldStyle.swift */; };
 		3D90BBD12AE4665100488A7F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D90BBD02AE4665100488A7F /* ProfileViewController.swift */; };
+		3D9780302AEAEDA700184C61 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97802F2AEAEDA700184C61 /* DetailPageViewController.swift */; };
+		3D9780322AEB4E6000184C61 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9780312AEB4E6000184C61 /* DetailCollectionViewCell.swift */; };
 		3DA4F1CC2AE04C57002A359B /* RentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA4F1CB2AE04C57002A359B /* RentData.swift */; };
 		3DBB4C782AD08C7B00B5ED8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C772AD08C7B00B5ED8D /* AppDelegate.swift */; };
 		3DBB4C7A2AD08C7B00B5ED8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C792AD08C7B00B5ED8D /* SceneDelegate.swift */; };
@@ -33,6 +35,8 @@
 		3D5FDBC72ADF8E4E0059E022 /* RentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RentCell.xib; sourceTree = "<group>"; };
 		3D778F912AE2ED0E009085EC /* Button_FieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button_FieldStyle.swift; sourceTree = "<group>"; };
 		3D90BBD02AE4665100488A7F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3D97802F2AEAEDA700184C61 /* DetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
+		3D9780312AEB4E6000184C61 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DA4F1CB2AE04C57002A359B /* RentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentData.swift; sourceTree = "<group>"; };
 		3DBB4C742AD08C7B00B5ED8D /* RentEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBB4C772AD08C7B00B5ED8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				3D1A9A362AD34911007A34DB /* VerifyEmailViewController.swift */,
 				3D3040BF2AD995EB000D1763 /* HomePageViewController.swift */,
 				3D90BBD02AE4665100488A7F /* ProfileViewController.swift */,
+				3D97802F2AEAEDA700184C61 /* DetailPageViewController.swift */,
+				3D9780312AEB4E6000184C61 /* DetailCollectionViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -190,6 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D9780302AEAEDA700184C61 /* DetailPageViewController.swift in Sources */,
+				3D9780322AEB4E6000184C61 /* DetailCollectionViewCell.swift in Sources */,
 				3DBB4C7C2AD08C7B00B5ED8D /* LoginViewController.swift in Sources */,
 				3DA4F1CC2AE04C57002A359B /* RentData.swift in Sources */,
 				3D3040C02AD995EB000D1763 /* HomePageViewController.swift in Sources */,
@@ -347,6 +355,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5TVK25RQ2U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentEasy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -373,6 +382,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5TVK25RQ2U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentEasy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

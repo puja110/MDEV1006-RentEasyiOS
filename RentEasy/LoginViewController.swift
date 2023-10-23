@@ -22,18 +22,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        // Login Animation
-               loginLogo.alpha = 0
-               loginLogo.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-               UIView.animate(withDuration: 1.0, delay: 0.5,
-                              usingSpringWithDamping: 0.7,
-                              initialSpringVelocity: 0,
-                              options: [],
-                              animations: {
-                   self.loginLogo.alpha = 1
-                   self.loginLogo.transform = .identity
-               }, completion: nil)
-        
+//        // Login Animation
+//               loginLogo.alpha = 0
+//               loginLogo.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+//               UIView.animate(withDuration: 1.0, delay: 0.5,
+//                              usingSpringWithDamping: 0.7,
+//                              initialSpringVelocity: 0,
+//                              options: [],
+//                              animations: {
+//                   self.loginLogo.alpha = 1
+//                   self.loginLogo.transform = .identity
+//               }, completion: nil)
+//        
         //Button and TextField Styling
         button_FieldStyle.buttonShape(loginButton)
         button_FieldStyle.buttonShape(createAccountButton)
