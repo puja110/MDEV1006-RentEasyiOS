@@ -7,19 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1A9A332AD348CA007A34DB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A9A322AD348CA007A34DB /* SignUpViewController.swift */; };
+		3D1A9A352AD348EF007A34DB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A9A342AD348EF007A34DB /* ResetPasswordViewController.swift */; };
+		3D1A9A372AD34911007A34DB /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A9A362AD34911007A34DB /* VerifyEmailViewController.swift */; };
+		3D3040C02AD995EB000D1763 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3040BF2AD995EB000D1763 /* HomePageViewController.swift */; };
+		3D5FDBC82ADF8E4E0059E022 /* RentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FDBC62ADF8E4E0059E022 /* RentCell.swift */; };
+		3D5FDBC92ADF8E4E0059E022 /* RentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D5FDBC72ADF8E4E0059E022 /* RentCell.xib */; };
+		3D778F922AE2ED0E009085EC /* Button_FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D778F912AE2ED0E009085EC /* Button_FieldStyle.swift */; };
+		3D90BBD12AE4665100488A7F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D90BBD02AE4665100488A7F /* ProfileViewController.swift */; };
+		3DA4F1CC2AE04C57002A359B /* RentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA4F1CB2AE04C57002A359B /* RentData.swift */; };
 		3DBB4C782AD08C7B00B5ED8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C772AD08C7B00B5ED8D /* AppDelegate.swift */; };
 		3DBB4C7A2AD08C7B00B5ED8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C792AD08C7B00B5ED8D /* SceneDelegate.swift */; };
-		3DBB4C7C2AD08C7B00B5ED8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C7B2AD08C7B00B5ED8D /* ViewController.swift */; };
+		3DBB4C7C2AD08C7B00B5ED8D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB4C7B2AD08C7B00B5ED8D /* LoginViewController.swift */; };
 		3DBB4C7F2AD08C7B00B5ED8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C7D2AD08C7B00B5ED8D /* Main.storyboard */; };
 		3DBB4C812AD08C7C00B5ED8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C802AD08C7C00B5ED8D /* Assets.xcassets */; };
 		3DBB4C842AD08C7C00B5ED8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C822AD08C7C00B5ED8D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1A9A322AD348CA007A34DB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3D1A9A342AD348EF007A34DB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		3D1A9A362AD34911007A34DB /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
+		3D3040BF2AD995EB000D1763 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		3D5FDBC62ADF8E4E0059E022 /* RentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentCell.swift; sourceTree = "<group>"; };
+		3D5FDBC72ADF8E4E0059E022 /* RentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RentCell.xib; sourceTree = "<group>"; };
+		3D778F912AE2ED0E009085EC /* Button_FieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button_FieldStyle.swift; sourceTree = "<group>"; };
+		3D90BBD02AE4665100488A7F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3DA4F1CB2AE04C57002A359B /* RentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentData.swift; sourceTree = "<group>"; };
 		3DBB4C742AD08C7B00B5ED8D /* RentEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBB4C772AD08C7B00B5ED8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DBB4C792AD08C7B00B5ED8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3DBB4C7B2AD08C7B00B5ED8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3DBB4C7B2AD08C7B00B5ED8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3DBB4C7E2AD08C7B00B5ED8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DBB4C802AD08C7C00B5ED8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DBB4C832AD08C7C00B5ED8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,6 +55,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1A9A2E2AD30F72007A34DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3DA4F1CB2AE04C57002A359B /* RentData.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3D1A9A302AD30FEB007A34DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3DBB4C7D2AD08C7B00B5ED8D /* Main.storyboard */,
+				3D5FDBC62ADF8E4E0059E022 /* RentCell.swift */,
+				3D5FDBC72ADF8E4E0059E022 /* RentCell.xib */,
+				3D778F912AE2ED0E009085EC /* Button_FieldStyle.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3D1A9A312AD3104C007A34DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DBB4C7B2AD08C7B00B5ED8D /* LoginViewController.swift */,
+				3D1A9A322AD348CA007A34DB /* SignUpViewController.swift */,
+				3D1A9A342AD348EF007A34DB /* ResetPasswordViewController.swift */,
+				3D1A9A362AD34911007A34DB /* VerifyEmailViewController.swift */,
+				3D3040BF2AD995EB000D1763 /* HomePageViewController.swift */,
+				3D90BBD02AE4665100488A7F /* ProfileViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		3DBB4C6B2AD08C7B00B5ED8D = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +108,9 @@
 			children = (
 				3DBB4C772AD08C7B00B5ED8D /* AppDelegate.swift */,
 				3DBB4C792AD08C7B00B5ED8D /* SceneDelegate.swift */,
-				3DBB4C7B2AD08C7B00B5ED8D /* ViewController.swift */,
-				3DBB4C7D2AD08C7B00B5ED8D /* Main.storyboard */,
+				3D1A9A2E2AD30F72007A34DB /* Model */,
+				3D1A9A302AD30FEB007A34DB /* Views */,
+				3D1A9A312AD3104C007A34DB /* Controllers */,
 				3DBB4C802AD08C7C00B5ED8D /* Assets.xcassets */,
 				3DBB4C822AD08C7C00B5ED8D /* LaunchScreen.storyboard */,
 				3DBB4C852AD08C7C00B5ED8D /* Info.plist */,
@@ -127,6 +178,7 @@
 			files = (
 				3DBB4C842AD08C7C00B5ED8D /* LaunchScreen.storyboard in Resources */,
 				3DBB4C812AD08C7C00B5ED8D /* Assets.xcassets in Resources */,
+				3D5FDBC92ADF8E4E0059E022 /* RentCell.xib in Resources */,
 				3DBB4C7F2AD08C7B00B5ED8D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +190,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DBB4C7C2AD08C7B00B5ED8D /* ViewController.swift in Sources */,
+				3DBB4C7C2AD08C7B00B5ED8D /* LoginViewController.swift in Sources */,
+				3DA4F1CC2AE04C57002A359B /* RentData.swift in Sources */,
+				3D3040C02AD995EB000D1763 /* HomePageViewController.swift in Sources */,
+				3D5FDBC82ADF8E4E0059E022 /* RentCell.swift in Sources */,
 				3DBB4C782AD08C7B00B5ED8D /* AppDelegate.swift in Sources */,
+				3D1A9A352AD348EF007A34DB /* ResetPasswordViewController.swift in Sources */,
+				3D90BBD12AE4665100488A7F /* ProfileViewController.swift in Sources */,
+				3D1A9A332AD348CA007A34DB /* SignUpViewController.swift in Sources */,
+				3D778F922AE2ED0E009085EC /* Button_FieldStyle.swift in Sources */,
+				3D1A9A372AD34911007A34DB /* VerifyEmailViewController.swift in Sources */,
 				3DBB4C7A2AD08C7B00B5ED8D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,8 +352,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,8 +378,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

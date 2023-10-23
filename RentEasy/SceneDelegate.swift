@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-10-06.
+//  Created by CodeSomps on 2023-10-06.
 //
 
 import UIKit
