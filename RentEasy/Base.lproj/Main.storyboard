@@ -935,6 +935,7 @@
                     <connections>
                         <outlet property="createAccountButton" destination="DYE-Lf-EUG" id="KXK-Me-Ved"/>
                         <outlet property="loginButton" destination="rov-8Z-o6A" id="F7X-2F-peu"/>
+                        <outlet property="loginLogoImg" destination="dTf-83-uR8" id="ftw-KA-mti"/>
                         <outlet property="passwordTextField" destination="4c5-wS-6gw" id="hRN-PM-GCC"/>
                         <outlet property="usernameTextField" destination="sf7-fd-YB6" id="fqu-nf-6jI"/>
                     </connections>
