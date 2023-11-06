@@ -7,7 +7,18 @@
 
 import UIKit
 
+//Implementing protocol to serve as listener in HomePageViewController
+protocol RencCellDelegate {
+    //Delegate function
+    func didTapFavoriteButton(_ cell: RentCell)
+}
+
 class RentCell: UITableViewCell {
+    
+    //Creating delegate property
+    var delegate: RencCellDelegate?
+    
+
 
     @IBOutlet weak var rentCustomCell: UIView!
     @IBOutlet weak var propertyName: UILabel!
@@ -16,6 +27,8 @@ class RentCell: UITableViewCell {
     @IBOutlet weak var propertySize: UILabel!
     @IBOutlet weak var propertyAmount: UILabel!
     @IBOutlet weak var propertyImage: UIImageView!
+    @IBOutlet weak var cellStackView: UIStackView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -30,4 +43,17 @@ class RentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        //setting it delegate
+        delegate?.didTapFavoriteButton(self)
+        
+        //Changing favorite button color
+        if sender.currentImage == UIImage(systemName: "heart.fill") {
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        
+    }
 }

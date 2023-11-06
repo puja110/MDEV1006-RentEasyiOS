@@ -8,8 +8,9 @@
 import UIKit
 
 class DetailCollectionViewCell: UICollectionViewCell {
-   
+   //This is the image collection cells class
     @IBOutlet weak var detailImages: UIImageView!
+    
     
     
 }

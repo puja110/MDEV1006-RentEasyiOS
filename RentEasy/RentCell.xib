@@ -18,10 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="357" height="113"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cWF-Uq-H0V">
+                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cWF-Uq-H0V">
                         <rect key="frame" x="10" y="10" width="337" height="93"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buttery - instasize" translatesAutoresizingMaskIntoConstraints="NO" id="Akg-co-N6u">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buttery - instasize" translatesAutoresizingMaskIntoConstraints="NO" id="Akg-co-N6u">
                                 <rect key="frame" x="0.0" y="0.0" width="90" height="93"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="ztE-SU-6r6"/>
@@ -75,15 +75,18 @@
                                                         <rect key="frame" x="181.33333333333331" y="0.0" width="50.666666666666657" height="20.666666666666668"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                            <color key="baseForegroundColor" red="0.76320876289999995" green="0.25543995089999999" blue="0.203914602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="baseForegroundColor" systemColor="systemRedColor"/>
                                                         </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="favoriteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0ub-m9-aec"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="cA3-Lp-g3p" secondAttribute="bottom" constant="5" id="FE0-cl-5G3"/>
                                     <constraint firstItem="cA3-Lp-g3p" firstAttribute="top" secondItem="ScV-sn-8s6" secondAttribute="top" constant="5" id="SEf-dV-IHq"/>
@@ -92,6 +95,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -103,6 +107,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="cellStackView" destination="cWF-Uq-H0V" id="N0o-6c-IlA"/>
+                <outlet property="favoriteButton" destination="wdW-lh-HGq" id="7U8-Mp-0jz"/>
                 <outlet property="propertyAddress" destination="Cf4-8l-0QU" id="gZr-Bq-GAg"/>
                 <outlet property="propertyAmount" destination="caG-4f-GCc" id="fxu-PD-fCu"/>
                 <outlet property="propertyImage" destination="Akg-co-N6u" id="Ctq-cC-OTf"/>
@@ -111,20 +117,23 @@
                 <outlet property="rentCustomCell" destination="ScV-sn-8s6" id="Hn7-ds-3ID"/>
                 <outlet property="rentStatus" destination="9k6-eo-Tcm" id="bQ1-9c-oB9"/>
             </connections>
-            <point key="canvasLocation" x="-61.832061068702288" y="13.028169014084508"/>
+            <point key="canvasLocation" x="105" y="10"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="buttery - instasize" width="120" height="120"/>
         <image name="heart" catalog="system" width="128" height="107"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
