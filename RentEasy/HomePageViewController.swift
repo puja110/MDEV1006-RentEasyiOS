@@ -10,6 +10,7 @@ import UIKit
 class HomePageViewController: UIViewController, UITextFieldDelegate {
     
 
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var lowerAndUpperStackConstraints: NSLayoutConstraint!
@@ -33,6 +34,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         
         searchTextField.delegate = self
         searchBarAppearance.glassAndFilterTextField(textField: searchTextField)
@@ -80,6 +82,8 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
                     print("Destination view controller is not of type DetailPageViewController")
                 }
             }
+        navigationController?.setNavigationBarHidden(false, animated: true)
+       
     }
     
     
@@ -94,12 +98,16 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
             // Setting category view contraints
             if lowerStackHeight >= hide {
                 hScrollView.isHidden = true
+                navigationController?.setNavigationBarHidden(true, animated: false)
+                categoryLabel.isHidden = true
                 //lowerStack Constraining to the first stack view above with 10points
                 lowerAndUpperStackConstraints.constant = 10
             } else {
                //  Displaying category
                 hScrollView.isHidden = false
                 //returning the lowerStack contraint to it's initial value
+                navigationController?.setNavigationBarHidden(false, animated: true)
+                categoryLabel.isHidden = false
                 lowerAndUpperStackConstraints.constant = 165.67
             }
             // Updating the constraint change with animation presentation

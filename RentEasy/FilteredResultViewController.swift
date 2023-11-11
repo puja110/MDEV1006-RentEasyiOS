@@ -14,10 +14,11 @@ class FilteredResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         //Registering custom cell
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
     }
+    
 }
 
 extension FilteredResultViewController: UITableViewDelegate {

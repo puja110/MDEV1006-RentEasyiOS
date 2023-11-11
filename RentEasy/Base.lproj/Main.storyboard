@@ -846,6 +846,7 @@
                         <outlet property="categoryButton2" destination="pbh-ub-FV4" id="Qyu-EL-a8E"/>
                         <outlet property="categoryButton3" destination="Uhc-gG-uyE" id="2Vo-P9-Unt"/>
                         <outlet property="categoryButton4" destination="2ny-hB-S7V" id="1l2-fq-PbU"/>
+                        <outlet property="categoryLabel" destination="7x3-xQ-dR2" id="pAk-tI-vGf"/>
                         <outlet property="hScrollView" destination="Aka-5H-Yc5" id="eUN-yk-l6G"/>
                         <outlet property="hScrollViewHeight" destination="mnm-A8-0Qj" id="3bW-Cf-eWs"/>
                         <outlet property="innerStack" destination="TmE-vd-tye" id="aRP-jZ-MWN"/>
