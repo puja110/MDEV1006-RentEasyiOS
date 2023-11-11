@@ -31,11 +31,11 @@ struct RentData {
     let property: [RentData] = [
         RentData(name: "House One", amount: "$1000", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseOne"), status: "Available", size: "Two Bedroom", 
                  testimonies: [
-            RentData.Testimony(name: "Manushi Khadka", comment: "This home is a true gem! It's a beautiful and inviting space that's perfect for creating lasting memories. You won't want to miss the chance to make this your new home"),
-            RentData.Testimony(name: "Pramog Regmi", comment: "A true haven for those seeking a place to call home. This rental is not just beautiful; it's a slice of paradise that you can enjoy every day. Don't let this opportunity slip away!"),
-            RentData.Testimony(name: "Suyog Shresta", comment: "Simply stunning! This home is an embodiment of beauty and comfort, offering a wonderful place to rent and create your own slice of paradise. Don't miss out on this delightful opportunity"),
-            RentData.Testimony(name: "Olasile Oladipupo", comment: "An exquisite home available for rent! This place is a perfect blend of elegance and warmth, and it's ready to become your new sanctuary. Grab this chance to experience the beauty of this lovely home."),
-            RentData.Testimony(name: "Puja Shresta", comment: "This home is a real treasure! It's not just a place to rent; it's a space where you can truly make memories and enjoy the beauty of everyday life. Don't hesitate to seize this fantastic opportunity") ]),
+            RentData.Testimony(name: "Adam Adam", comment: "This home is a true gem! It's a beautiful and inviting space that's perfect for creating lasting memories. You won't want to miss the chance to make this your new home"),
+            RentData.Testimony(name: "John Legend", comment: "A true haven for those seeking a place to call home. This rental is not just beautiful; it's a slice of paradise that you can enjoy every day. Don't let this opportunity slip away!"),
+            RentData.Testimony(name: "Emily Eva", comment: "Simply stunning! This home is an embodiment of beauty and comfort, offering a wonderful place to rent and create your own slice of paradise. Don't miss out on this delightful opportunity"),
+            RentData.Testimony(name: "Taylor Swift", comment: "An exquisite home available for rent! This place is a perfect blend of elegance and warmth, and it's ready to become your new sanctuary. Grab this chance to experience the beauty of this lovely home."),
+            RentData.Testimony(name: "Beyonce knowless", comment: "This home is a real treasure! It's not just a place to rent; it's a space where you can truly make memories and enjoy the beauty of everyday life. Don't hesitate to seize this fantastic opportunity") ]),
         
     
         RentData(name: "House Two", amount: "$2000", address: "Alliston", image: UIImage(imageLiteralResourceName: "houseTwo"), status: "Available", size: "Three Bedroom", testimonies: [RentData.Testimony(name: "Olasile Oladipupo", comment: "Wow, what a find! This home is an absolute beauty, offering a perfect blend of style and comfort. It's an excellent place to rent and create a warm, inviting atmosphere for yourself.")]),

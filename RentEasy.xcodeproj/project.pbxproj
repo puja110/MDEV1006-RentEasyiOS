@@ -20,6 +20,7 @@
 		3D6855E52AF49E5900806B2A /* TestimonialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D6855E32AF49E5900806B2A /* TestimonialTableViewCell.xib */; };
 		3D6855E72AF4A50200806B2A /* TestimonyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6855E62AF4A50200806B2A /* TestimonyData.swift */; };
 		3D6855ED2AF57E1D00806B2A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6855EC2AF57E1D00806B2A /* FilterViewController.swift */; };
+		3D75EA452AFEAE7F00714AE2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D75EA442AFEAE7F00714AE2 /* PostViewController.swift */; };
 		3D76B9E82AF6ACC700EDBD98 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D76B9E72AF6ACC700EDBD98 /* HistoryViewController.swift */; };
 		3D76B9EB2AF6B40C00EDBD98 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D76B9E92AF6B40C00EDBD98 /* HistoryTableViewCell.swift */; };
 		3D76B9EC2AF6B40C00EDBD98 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D76B9EA2AF6B40C00EDBD98 /* HistoryTableViewCell.xib */; };
@@ -52,6 +53,7 @@
 		3D6855E32AF49E5900806B2A /* TestimonialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestimonialTableViewCell.xib; sourceTree = "<group>"; };
 		3D6855E62AF4A50200806B2A /* TestimonyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestimonyData.swift; sourceTree = "<group>"; };
 		3D6855EC2AF57E1D00806B2A /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		3D75EA442AFEAE7F00714AE2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		3D76B9E72AF6ACC700EDBD98 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		3D76B9E92AF6B40C00EDBD98 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		3D76B9EA2AF6B40C00EDBD98 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -116,15 +118,16 @@
 			children = (
 				3DBB4C7B2AD08C7B00B5ED8D /* LoginViewController.swift */,
 				3D1A9A322AD348CA007A34DB /* SignUpViewController.swift */,
-				3D1A9A342AD348EF007A34DB /* ResetPasswordViewController.swift */,
 				3D1A9A362AD34911007A34DB /* VerifyEmailViewController.swift */,
 				3D3040BF2AD995EB000D1763 /* HomePageViewController.swift */,
 				3D90BBD02AE4665100488A7F /* ProfileViewController.swift */,
 				3D97802F2AEAEDA700184C61 /* DetailPageViewController.swift */,
 				3D0939FF2AF3717E00D87B81 /* FavoriteTableViewController.swift */,
+				3D1A9A342AD348EF007A34DB /* ResetPasswordViewController.swift */,
 				3D6855EC2AF57E1D00806B2A /* FilterViewController.swift */,
 				3D4BFCFE2AF5BB4F004D2B06 /* FilteredResultViewController.swift */,
 				3D76B9E72AF6ACC700EDBD98 /* HistoryViewController.swift */,
+				3D75EA442AFEAE7F00714AE2 /* PostViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D75EA452AFEAE7F00714AE2 /* PostViewController.swift in Sources */,
 				3D4BFCFF2AF5BB4F004D2B06 /* FilteredResultViewController.swift in Sources */,
 				3D9780302AEAEDA700184C61 /* DetailPageViewController.swift in Sources */,
 				3D9780322AEB4E6000184C61 /* DetailCollectionViewCell.swift in Sources */,

@@ -22,6 +22,7 @@ class HistoryViewController: UIViewController {
     var soldHistoryData = soldHistory
     var holdHistoryData = holdHistory
     var currentDataSource: [HistoryData] = allHistory
+    var searchBarAppearance = SearchBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,7 @@ class HistoryViewController: UIViewController {
         changeButtonAppearance(myButton: soldButton)
         
         //SearchBarAppearance
-        searchFieldApperance(searchBarTextField)
-        glassFilterTextField(textField: searchBarTextField)
+        searchBarAppearance.glassAndFilterTextField(textField: searchBarTextField)
        
         
         tableView.reloadData()
@@ -111,45 +111,9 @@ extension HistoryViewController {
     func changeButtonAppearance(myButton: UIButton) {
         
         myButton.backgroundColor = .white
-       // myButton.setTitleColor(.black, for: .normal)
         myButton.layer.borderWidth = 2.0
         myButton.layer.borderColor = UIColor.black.cgColor
         myButton.layer.cornerRadius = 10.0
     }
     
-}
-
-
-//MARK: Customizing SearchBar
-extension HistoryViewController {
-    func glassFilterTextField(textField: UITextField) {
-        // Creating magnifyingGlass
-        let magnifyingGlassSymbol = UIImage(systemName: "magnifyingglass")
-        let magnifyingGlassImageView = UIImageView(image: magnifyingGlassSymbol)
-        magnifyingGlassImageView.backgroundColor = UIColor(named: "systemGray")
-        magnifyingGlassImageView.frame = CGRect(x: 100, y: 0, width: 40, height: 40)
-        magnifyingGlassImageView.tintColor = UIColor.systemGray
-        magnifyingGlassImageView.contentMode = .center
-        textField.leftView = magnifyingGlassImageView
-        textField.leftViewMode = .always
-
-        // Filter Button
-        let filterSymbol = UIImage(systemName: "slider.vertical.3")
-        let filterButton = UIButton(type: .custom)
-        filterButton.setImage(filterSymbol, for: .normal)
-        filterButton.frame = CGRect(x: 100, y: 0, width: 30, height: 30)
-        filterButton.tintColor = UIColor.systemGray
-        textField.rightView = filterButton
-        textField.rightViewMode = .always
-    }
-    
-    
-    func searchFieldApperance(_ textField: UITextField) {
-        textField.layer.cornerRadius = 15.0
-        textField.layer.masksToBounds = true
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowRadius = 2
-        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
-        textField.layer.shadowOpacity = 0.9
-    }
 }

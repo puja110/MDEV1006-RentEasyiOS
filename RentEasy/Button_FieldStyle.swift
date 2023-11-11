@@ -32,4 +32,14 @@ struct Button_FieldStyle {
         textField.layer.shadowOpacity = 0.3
        // textField.backgroundColor = UIColor.white
     }
+    
+    
+    func customButtonShape(_ uiView: UIView) {
+          uiView.layer.cornerRadius = 10.0
+         // uiView.layer.masksToBounds = true
+          uiView.layer.shadowColor = UIColor.black.cgColor
+          uiView.layer.shadowRadius = 3
+          uiView.layer.shadowOffset = CGSize(width: 1, height: 1)
+          uiView.layer.shadowOpacity = 0.8
+    }
 }
