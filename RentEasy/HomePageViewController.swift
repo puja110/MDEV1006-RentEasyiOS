@@ -86,22 +86,18 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Hiding Category View
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
-            //the table view scrolling
-            // Calculating the when to hide hScrollView
+            // Calculating when to hide hScrollView
             let hide: CGFloat = cetegoryViewHeight
             
             // Getting lowerstackview height
             let lowerStackHeight = tableView.contentOffset.y
             // Setting category view contraints
             if lowerStackHeight >= hide {
-                let newContentOffset = CGPoint(x: 0, y: lowerStackHeight - hide)
-                hScrollView.setContentOffset(newContentOffset, animated: false)
                 hScrollView.isHidden = true
                 //lowerStack Constraining to the first stack view above with 10points
                 lowerAndUpperStackConstraints.constant = 10
             } else {
                //  Displaying category
-                hScrollView.setContentOffset(CGPoint.zero, animated: false)
                 hScrollView.isHidden = false
                 //returning the lowerStack contraint to it's initial value
                 lowerAndUpperStackConstraints.constant = 165.67

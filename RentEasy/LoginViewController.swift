@@ -30,8 +30,7 @@ class LoginViewController: UIViewController {
                loginLogoImg.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                UIView.animate(withDuration: 1.0, delay: 0.5,
                               usingSpringWithDamping: 0.7,
-                              initialSpringVelocity: 0,
-                              options: [],
+                              initialSpringVelocity: 0,                           
                               animations: {
                    self.loginLogoImg.alpha = 1
                    self.loginLogoImg.transform = .identity
