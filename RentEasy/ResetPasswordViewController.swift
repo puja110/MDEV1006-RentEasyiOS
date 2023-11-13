@@ -22,7 +22,5 @@ class ResetPasswordViewController: UIViewController {
         button_FieldStyle.textFieldShape(newPasswordTextField)
         button_FieldStyle.textFieldShape(confirmNewPasswordTextField)
         button_FieldStyle.buttonShape(confirmButton)
-
-       
     }
 }

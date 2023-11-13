@@ -17,20 +17,22 @@ struct Button_FieldStyle {
         button.layer.cornerRadius = 10.0
         // button.layer.masksToBounds = true
          button.layer.shadowColor = UIColor.gray.cgColor
-         button.layer.shadowRadius = 5
+         button.layer.shadowRadius = 2
          button.layer.shadowOffset = CGSize(width: 1, height: 1)
          button.layer.shadowOpacity = 1
        
     }
     
     func textFieldShape(_ textField: UITextField) {
-       // textField.layer.cornerRadius = 10.0
-      //  textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 8.0
+        textField.layer.borderWidth = 0.2
+     //   textField.layer.borderColor = UIColor.systemGray3.cgColor
+        //textField.layer.masksToBounds = true
         textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowRadius = 2
-        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
+        textField.layer.shadowRadius = 1
+        textField.layer.shadowOffset = CGSize(width: 1, height: 0.5)
         textField.layer.shadowOpacity = 0.3
-       // textField.backgroundColor = UIColor.white
+        textField.backgroundColor = UIColor.systemGray6
     }
     
     

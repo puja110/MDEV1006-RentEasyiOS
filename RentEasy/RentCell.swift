@@ -8,7 +8,7 @@
 import UIKit
 
 //Implementing protocol to serve as listener in HomePageViewController
-protocol RencCellDelegate {
+protocol RentCellDelegate {
     //Delegate function
     func didTapFavoriteButton(_ cell: RentCell)
 }
@@ -16,10 +16,10 @@ protocol RencCellDelegate {
 class RentCell: UITableViewCell {
     
     //Creating delegate property
-    var delegate: RencCellDelegate?
+    var delegate: RentCellDelegate?
     
-
-
+    
+    
     @IBOutlet weak var rentCustomCell: UIView!
     @IBOutlet weak var propertyName: UILabel!
     @IBOutlet weak var rentStatus: UILabel!
@@ -36,19 +36,19 @@ class RentCell: UITableViewCell {
         // Initialization code
         propertyImage.layer.cornerRadius = 5
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-        //setting it delegate
+        //setting delegate
         delegate?.didTapFavoriteButton(self)
         
-        //Changing favorite button color
+        //Changing favorite button
         if sender.currentImage == UIImage(systemName: "heart.fill") {
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
         } else {
@@ -56,4 +56,5 @@ class RentCell: UITableViewCell {
         }
         
     }
+    
 }

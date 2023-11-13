@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 struct RentData {
     let name: String
@@ -18,8 +19,6 @@ struct RentData {
     var isFavorite = false
     var testimonies: [Testimony] 
 
-       
-    
     
     struct Testimony {
             let name: String
@@ -79,3 +78,18 @@ struct RentData {
 
 ]
 
+//MARK: - CONVERTING RENTADA TO RENTDATAENTITY
+extension RentData {
+    func convertToRentEntity(context: NSManagedObjectContext) -> RentDataEntity {
+        let favoriteCellEntity = RentDataEntity(context: context)
+        favoriteCellEntity.name = name
+        favoriteCellEntity.amount = amount
+        favoriteCellEntity.address = address
+//      favoriteCellEntity.image = image.jpegData(compressionQuality: 0.8)
+        favoriteCellEntity.status = status
+        favoriteCellEntity.size = size
+        favoriteCellEntity.isFavorite = isFavorite
+
+        return favoriteCellEntity
+    }
+}

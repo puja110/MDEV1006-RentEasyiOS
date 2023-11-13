@@ -15,10 +15,9 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     @IBOutlet weak var mapView: MKMapView!
    
     var searchBarAppearance = SearchBarAppearance()
-    
     let locationManager = CLLocationManager()
     
-    //Instatiating the bottomSheet to popUp
+    //Instatiating VC popUp
       lazy var destinationVC: FilteredResultViewController? = {
           return UIStoryboard(name: "Main", bundle: nil)
           .instantiateViewController(withIdentifier: "FilteredResult") as?FilteredResultViewController}()
@@ -28,32 +27,29 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
          
           searchTextField.delegate = self
           searchBarAppearance.glassAndFilterTextField(textField: searchTextField)
-          
           locationService()
       }
         
     
-        //MARK: Presenting result view
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.text = ""
     }
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           // Dismissing KeyBoard
+           //Dismissing KeyBoard
            textField.resignFirstResponder()
            presentVC()
            return true
        }
     
-    //Function to present Destination VC
+    //Presenting Bottom Sheet
     func presentVC() {
         if let destinationVC = destinationVC {
             destinationVC.modalPresentationStyle = .pageSheet
-            // Configuring presentation
+            //presentation
             if let bottomSheet = destinationVC.presentationController as? UISheetPresentationController {
                 bottomSheet.detents = [.medium(), .large()]
-                //restricting from moving when scrolling
+                //restricting movement
                 bottomSheet.largestUndimmedDetentIdentifier = .medium
                 bottomSheet.preferredCornerRadius = 40
                 bottomSheet.prefersScrollingExpandsWhenScrolledToEdge = false
@@ -64,11 +60,9 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         
     }
     
-    
     //MARK: Location configuration
         func locationService() {
             locationManager.delegate = self
             locationManager.requestAlwaysAuthorization()
-            
     }
 }

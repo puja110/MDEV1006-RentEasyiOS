@@ -15,7 +15,6 @@ class FilteredResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Registering custom cell
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
     }
     
@@ -32,20 +31,18 @@ extension FilteredResultViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //cast RentCell in cell
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! RentCell
         
         let houses = property[indexPath.row]
     
         cell.propertyName.text = houses.name
-       // cell.propertyImage.image = houses.image
+      //cell.propertyImage.image = houses.image
         cell.propertyAmount.text = houses.amount
         cell.propertyAddress.text = houses.address
         cell.rentStatus.text = houses.status
         cell.propertySize.text = houses.size
         
-        
-        //Setting cornerRadius for tableView Cells.
         cell.cellStackView.layer.cornerRadius = 5
         cell.layer.shadowColor = UIColor.lightGray.cgColor
         cell.layer.shadowRadius = 2

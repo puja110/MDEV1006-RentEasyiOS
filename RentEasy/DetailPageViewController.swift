@@ -11,29 +11,27 @@ class DetailPageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var houseName: UILabel!
+    @IBOutlet weak var houseAddress: UIButton!
+    @IBOutlet weak var houseSize: UIButton!
     
     var rentData: RentData?
-    //Initializing control to DetailPage with segue
+    //Initializing control to DetailPage
     var selectedItem: RentData? {
           didSet {
              rentData = selectedItem
               tableView?.reloadData()
           }
       }
-    
-    //Displayed Images
+    //Displaying dummy Images
     let images: [String] = ["houseOne", "houseTwo", "houseThree" ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        if tableView != nil {
-              print("connected")
-          } else {
-              print("tableView is not connected.")
-          }
+        
+        houseName.text = rentData?.name
+        houseAddress.setTitle(rentData?.address, for: .normal)
+        houseSize.setTitle(rentData?.size, for: .normal)
         
         //Custom Cell
         tableView.register(UINib(nibName: "TestimonialTableViewCell", bundle: nil), forCellReuseIdentifier: "TestimonialCell")
@@ -73,12 +71,9 @@ extension DetailPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        //cast RentCell in cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "TestimonialCell", for: indexPath)as! TestimonialTableViewCell
-        
+
         let comments = rentData?.testimonies[indexPath.row]
-        
         cell.reviewersName.text = comments?.name
         cell.reviewersComment.text = comments?.comment
         

@@ -8,10 +8,11 @@
 import UIKit
 
 class HomePageViewController: UIViewController, UITextFieldDelegate {
+ 
+//MARK: - IBOUTLETS
     
-
+    @IBOutlet weak var seeMoreButton: UIButton!
     @IBOutlet weak var categoryLabel: UILabel!
-    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var lowerAndUpperStackConstraints: NSLayoutConstraint!
     @IBOutlet weak var topStackView: UIStackView!
@@ -19,35 +20,35 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lowerStackView: UIStackView!
     @IBOutlet weak var innerStack: UIStackView!
     @IBOutlet weak var hScrollViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var categoryButton1: UIButton!
     @IBOutlet weak var categoryButton2: UIButton!
     @IBOutlet weak var categoryButton3: UIButton!
     @IBOutlet weak var categoryButton4: UIButton!
     
+    var dataModelManager = DataModelManager()
     var searchBarAppearance = SearchBarAppearance()
-    
     //Height constant for Category view
-    let cetegoryViewHeight: CGFloat = 120
+    let categoryViewHeight: CGFloat = 120
     
+ 
+    //MARK: - VIEWDID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        dataModelManager.saveContext()
         
+        //MARK: CUSTOMIZATION
         searchTextField.delegate = self
         searchBarAppearance.glassAndFilterTextField(textField: searchTextField)
 
         searchTextField.becomeFirstResponder()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTextViewTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapSearchBar(_:)))
         searchTextField.addGestureRecognizer(tapGesture)
 
-        
         //customizing tableVIew
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        
         
         //Customizing category
         categoryButton1.layer.cornerRadius = 15
@@ -55,7 +56,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
         categoryButton3.layer.cornerRadius = 15
         categoryButton4.layer.cornerRadius = 15
         
-        //Implementing delegate for table view and horizontal ScrollView
+        //Implementing delegates
         tableView.delegate = self
         tableView.dataSource = self
         hScrollView.delegate = self
@@ -64,9 +65,15 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
     }
     
-    //MARK: - Filter Button on Search Bar Action
-    @objc func handleTextViewTap(_ sender: UITapGestureRecognizer) {
+    
+    //MARK: - Navigating to FilterViewController
+    @objc func tapSearchBar(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "FavoriteView", sender: self)
+    }
+    
+    //Setting Searchbar to edit.
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
     }
 
 //MARK: - Preparing Segue to Detail Page
@@ -76,14 +83,13 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
                     if let selectedItem = sender as? RentData {
                         destinationVC.selectedItem = selectedItem
                     } else {
-                        print("Sender is not of type RentData")
+                        print("Not RentData object")
                     }
                 } else {
-                    print("Destination view controller is not of type DetailPageViewController")
+                    print("DestinationVC ID can't be found.")
                 }
             }
         navigationController?.setNavigationBarHidden(false, animated: true)
-       
     }
     
     
@@ -91,8 +97,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
             // Calculating when to hide hScrollView
-            let hide: CGFloat = cetegoryViewHeight
-            
+            let hide: CGFloat = categoryViewHeight
             // Getting lowerstackview height
             let lowerStackHeight = tableView.contentOffset.y
             // Setting category view contraints
@@ -100,24 +105,21 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
                 hScrollView.isHidden = true
                 navigationController?.setNavigationBarHidden(true, animated: false)
                 categoryLabel.isHidden = true
-                //lowerStack Constraining to the first stack view above with 10points
+                seeMoreButton.isHidden = true
+                //lowerStack Constraining to view with
                 lowerAndUpperStackConstraints.constant = 10
             } else {
                //  Displaying category
                 hScrollView.isHidden = false
                 //returning the lowerStack contraint to it's initial value
-                navigationController?.setNavigationBarHidden(false, animated: true)
                 categoryLabel.isHidden = false
                 lowerAndUpperStackConstraints.constant = 165.67
+                navigationController?.setNavigationBarHidden(false, animated: true)
+                seeMoreButton.isHidden = false
             }
-            // Updating the constraint change with animation presentation
+            //animation
             UIView.animate(withDuration: 0.3) {self.view.layoutIfNeeded()}
         }
-    }
-    
-    //Setting Searchbar to edit as false
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return false
     }
     
 }
@@ -131,20 +133,21 @@ extension HomePageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        //cast RentCell in cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! RentCell
-        //setting delegate as self
+        //setting delegate as self for favoriting
         cell.delegate = self
         let houses = property[indexPath.row]
-    
         cell.propertyName.text = houses.name
-       // cell.propertyImage.image = houses.image
+      //cell.propertyImage.image = houses.image
         cell.propertyAmount.text = houses.amount
         cell.propertyAddress.text = houses.address
         cell.rentStatus.text = houses.status
         cell.propertySize.text = houses.size
+        DispatchQueue.main.async {
+            cell.favoriteButton.isSelected = houses.isFavorite
+           }
         
-        //Setting cornerRadius for tableView Cells.
+        //MARK: CUSTOMIZING CELL
         cell.cellStackView.layer.cornerRadius = 5
         cell.layer.shadowColor = UIColor.lightGray.cgColor
         cell.layer.shadowRadius = 2
@@ -157,44 +160,27 @@ extension HomePageViewController: UITableViewDataSource {
 }
 
 //MARK: -  TableView Deletage
+
 extension HomePageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // print(indexPath.row)
+     
         let selectedRentData = property[indexPath.row]
         performSegue(withIdentifier: "DetailPage", sender: selectedRentData)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
-//MARK: Implementing delgate method from RentCell for favorite button
-extension HomePageViewController: RencCellDelegate {
-   
-    func didTapFavoriteButton(_ cell: RentCell) {
-        if let indexPath = tableView.indexPath(for: cell) {
-            var item = property[indexPath.row]
-            tableView.reloadData()
-            item.isFavorite.toggle()
-            
-            print(item)
-            
-            if item.isFavorite {
-                FavoritesManager.favorites.favoritedItems.append(item)
-            } else {
-//                if let index = favoritedItems.firstIndex(of: item) {
-//                   favoritedItems.remove(at: index)
-//              }
+//MARK: - Implementing delgate method from RentCell for favorite button
+extension HomePageViewController: RentCellDelegate {
+
+        func didTapFavoriteButton(_ cell: RentCell) {
+            if let indexPath = tableView.indexPath(for: cell) {
+                let rentData = property[indexPath.row]
+                // Converting RentData to RentDataEntity
+                let rentDataEntity = rentData.convertToRentEntity(context: DataModelManager.shared.context)
+                rentDataEntity.isFavorite.toggle()
+                dataModelManager.saveContext()
+                tableView.reloadData()
             }
-        }
-        
     }
 }
-
-
-//MARK: Sharing data accross the classes using Singleton
-class FavoritesManager {
-    
-    static let favorites = FavoritesManager()
-
-    var favoritedItems: [RentData] = []
-}
-

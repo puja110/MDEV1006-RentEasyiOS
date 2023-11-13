@@ -10,18 +10,14 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
-    
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var settingView: UIView!
-    
     @IBOutlet weak var paymentDetailsView: UIView!
     
     var buttonFieldStyle = Button_FieldStyle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         buttonFieldStyle.customButtonShape(settingView)
@@ -42,7 +38,6 @@ class ProfileViewController: UIViewController {
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Logout", message: "Are you sure?", preferredStyle: .alert)
-        
         let yes = UIAlertAction(title: "Yes", style: .destructive) { _ in
             self.logOut()
         }
