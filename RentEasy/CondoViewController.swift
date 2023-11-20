@@ -2,7 +2,7 @@
 //  CondoViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-18.
+//  Created by CodeSOMPs on 2023-11-18.
 //
 
 import UIKit

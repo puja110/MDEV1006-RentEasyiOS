@@ -2,7 +2,7 @@
 //  DetailCollectionCell.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-19.
+//  Created by CodeSOMPs on 2023-11-19.
 //
 
 import UIKit

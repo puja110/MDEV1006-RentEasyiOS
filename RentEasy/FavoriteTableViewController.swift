@@ -2,7 +2,7 @@
 //  FavoriteTableViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-02.
+//  Created by CodeSOMPs on 2023-11-02.
 //
 
 import UIKit

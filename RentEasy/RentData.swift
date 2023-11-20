@@ -2,7 +2,7 @@
 //  RentData.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-10-18.
+//  Created by CodeSOMPs on 2023-10-18.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  DataModelManager.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-11.
+//  Created by CodeSOMPs on 2023-11-11.
 //
 
 import CoreData

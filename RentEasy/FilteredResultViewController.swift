@@ -2,7 +2,7 @@
 //  FilteredResultViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-03.
+//  Created by CodeSOMPs on 2023-11-03.
 //
 
 import UIKit

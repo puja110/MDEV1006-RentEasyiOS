@@ -2,7 +2,7 @@
 //  ProfileViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-10-21.
+//  Created by CodeSOMPs on 2023-10-21.
 //
 
 import UIKit

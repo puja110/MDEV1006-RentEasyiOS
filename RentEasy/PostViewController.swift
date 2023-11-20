@@ -2,7 +2,7 @@
 //  PostViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-10.
+//  Created by CodeSOMPs on 2023-11-10.
 //
 
 import UIKit

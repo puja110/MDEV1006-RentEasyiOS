@@ -2,7 +2,7 @@
 //  HomePageViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-10-13.
+//  Created by CodeSOMPs on 2023-10-13.
 //
 
 import UIKit

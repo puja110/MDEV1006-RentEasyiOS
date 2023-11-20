@@ -2,7 +2,7 @@
 //  SearchBarAppearance.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-04.
+//  Created by CodeSOMPs on 2023-11-04.
 //
 
 import Foundation

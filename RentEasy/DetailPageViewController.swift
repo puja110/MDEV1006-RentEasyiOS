@@ -2,7 +2,7 @@
 //  DetailPageViewController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-10-26.
+//  Created by CodeSOMPs on 2023-10-26.
 //
 
 import UIKit
