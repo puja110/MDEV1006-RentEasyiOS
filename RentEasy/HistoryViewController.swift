@@ -8,7 +8,7 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
-
+    
     
     
     @IBOutlet weak var searchBarTextField: UITextField!
@@ -31,10 +31,8 @@ class HistoryViewController: UIViewController {
         changeButtonAppearance(myButton: allButton)
         changeButtonAppearance(myButton: holdButton)
         changeButtonAppearance(myButton: soldButton)
-        //SearchBarAppearance
         searchBarAppearance.glassAndFilterTextField(textField: searchBarTextField)
         tableView.reloadData()
-        //Custom Cell
         tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
     }
     
@@ -48,14 +46,14 @@ class HistoryViewController: UIViewController {
     
     @IBAction func holdButtonPressed(_ sender: UIButton) {
         currentDataSource = holdHistoryData
-        historyLabel.text = "Hold History"
+        historyLabel.text = "Available History"
         sender.backgroundColor = UIColor.red
         tableView.reloadData()
     }
     
     @IBAction func soldButtonPressed(_ sender: UIButton) {
         currentDataSource = soldHistoryData
-        historyLabel.text = "Sold History"
+        historyLabel.text = "Booked History"
         sender.backgroundColor = UIColor.red
         tableView.reloadData()
     }
@@ -72,9 +70,7 @@ extension HistoryViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //casting cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryTableViewCell
-
         let houses = currentDataSource[indexPath.row]
         cell.houseName.text = houses.homeName
         cell.houseAddress.text = houses.homeAddress
@@ -97,7 +93,7 @@ extension HistoryViewController: UITableViewDataSource {
     
 }
 
-//MARK: Button Appearance
+//MARK: - Button Appearance
 extension HistoryViewController {
     
     func changeButtonAppearance(myButton: UIButton) {

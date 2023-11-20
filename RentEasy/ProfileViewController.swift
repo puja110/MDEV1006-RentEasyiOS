@@ -9,12 +9,18 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    
+    @IBOutlet weak var userEmailAddress: UILabel!
+    @IBOutlet weak var userLastName: UILabel!
+    @IBOutlet weak var userFirstName: UILabel!
+    @IBOutlet weak var profileDetailsStackView: UIStackView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var settingView: UIView!
     @IBOutlet weak var paymentDetailsView: UIView!
     
     var buttonFieldStyle = Button_FieldStyle()
+    var viewLine = Button_FieldStyle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +29,16 @@ class ProfileViewController: UIViewController {
         buttonFieldStyle.customButtonShape(settingView)
         buttonFieldStyle.customButtonShape(paymentDetailsView)
         buttonFieldStyle.buttonShape(logoutButton)
+        buttonFieldStyle.viewLine(profileDetailsStackView)
+        
+        if let userDetails = DataModelManager.shared.fetchUserDetails() {
+            let firstName = userDetails.firstName
+            let lastName = userDetails.lastName
+            let emailAddress = userDetails.emailAddress
+            userFirstName.text = firstName
+            userLastName.text = lastName
+            userEmailAddress.text = emailAddress
+        }
     }
     
     

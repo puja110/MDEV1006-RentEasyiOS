@@ -9,9 +9,13 @@ import CoreData
 import UIKit
 import Foundation
 
+protocol DataModelManagerDelegate: AnyObject {
+    func didSaveItem()
+}
 
 class DataModelManager {
     static let shared = DataModelManager()
+    weak var delegate: DataModelManagerDelegate?
     
     init() {}
     
@@ -27,23 +31,25 @@ class DataModelManager {
     
     func saveContext() {
         do {
-            try context.save()            
+            try context.save()
+            delegate?.didSaveItem()
         } catch {
             print("Error saving: \(error)")
         }
     }
-
+    
     
     
     //MARK: - LOAD ITEMS
     
     func loadItems() -> [RentDataEntity] {
         let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        
         do {
             let fetchItems = try context.fetch(request)
             return fetchItems
         } catch {
-            print("Error fetching item: \(error)")
+            print("Error fetching: \(error)")
         }
         return []
     }
@@ -59,10 +65,10 @@ class DataModelManager {
         
         let newUser = UserDetails(context: context)
         newUser.emailAddress = email
-           newUser.password = password
-           newUser.phoneNumber = phoneNumber
-           newUser.firstName = firstName
-           newUser.lastName = lastName
+        newUser.password = password
+        newUser.phoneNumber = phoneNumber
+        newUser.firstName = firstName
+        newUser.lastName = lastName
         do {
             try context.save()
             print("saved successfully")
@@ -91,6 +97,47 @@ class DataModelManager {
             return false
         }
     }
+    
+    
+    //MARK: - Fetching UserDetails
+    
+    func fetchUserDetails() -> UserDetails? {
+        let request: NSFetchRequest<UserDetails> = UserDetails.fetchRequest()
+        
+        do {
+            let userDetails = try context.fetch(request)
+            return userDetails.first
+        } catch {
+            print("Error: \(error)")
+            return nil
+        }
+    }
+    
+    //MARK: - UploadData
+    func uploadRentDataEntity(name: String, address: String, amount: String, size: String, newImage: Data?) {
+        let uploadData = RentDataEntity(context: context)
+        uploadData.name = name
+        uploadData.address = address
+        uploadData.amount = amount
+        uploadData.size = size
+        uploadData.image = newImage
+        
+        saveContext()
+        print("Saved Successfully")
+    }
+    
+    //DELETING USER
+    func deleteUserDetails() {
+        let request: NSFetchRequest<UserDetails> = UserDetails.fetchRequest()
+        do {
+            let userInfo = try context.fetch(request)
+            for user in userInfo {
+                context.delete(user)
+            }
+            saveContext()
+        } catch {
+            print("Error deleting user: \(error)")
+        }
+    }
+
 }
-
-

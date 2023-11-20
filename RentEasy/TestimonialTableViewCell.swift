@@ -10,7 +10,6 @@ import UIKit
 class TestimonialTableViewCell: UITableViewCell {
 
     @IBOutlet weak var reviewersName: UILabel!
-  
     @IBOutlet weak var reviewersComment: UITextView!
     
     
@@ -22,7 +21,6 @@ class TestimonialTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

@@ -40,8 +40,26 @@ struct Button_FieldStyle {
           uiView.layer.cornerRadius = 10.0
          // uiView.layer.masksToBounds = true
           uiView.layer.shadowColor = UIColor.black.cgColor
-          uiView.layer.shadowRadius = 3
+          uiView.layer.shadowRadius = 1
           uiView.layer.shadowOffset = CGSize(width: 1, height: 1)
           uiView.layer.shadowOpacity = 0.8
+    }
+    
+    
+    func categoryStackAppearance(_ stackView: UIStackView) {
+        stackView.layer.cornerRadius = 10
+        stackView.layer.shadowRadius = 1
+        stackView.layer.shadowOffset = CGSize(width: 0.5, height: 0)
+        stackView.layer.shadowOpacity = 0.3
+        stackView.layer.shadowColor = UIColor.black.cgColor
+    }
+    
+    func viewLine(_ stackView: UIStackView) {
+        let borderline = CALayer()
+        borderline.backgroundColor = UIColor.gray.cgColor
+        let width = stackView.bounds.size.width
+        let height: CGFloat = 0.2
+        borderline.frame = CGRect(x: 0, y: stackView.bounds.size.height - height, width: width, height: height)
+        stackView.layer.addSublayer(borderline)
     }
 }

@@ -15,10 +15,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginLogoImg: UIImageView!
     
-    
     let dataModelManager = DataModelManager.shared
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var button_FieldStyle = Button_FieldStyle()
+    var searchBarAppearance = SearchBarAppearance()
     
    
     override func viewDidLoad() {
@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
         button_FieldStyle.buttonShape(createAccountButton)
         button_FieldStyle.textFieldShape(usernameTextField)
         button_FieldStyle.textFieldShape(passwordTextField)
+        searchBarAppearance.secureEyeView(passwordTextField)
      
     }
     

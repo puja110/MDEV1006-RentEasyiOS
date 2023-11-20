@@ -7,18 +7,7 @@
 
 import UIKit
 
-//Implementing protocol to serve as listener in HomePageViewController
-protocol RentCellDelegate {
-    //Delegate function
-    func didTapFavoriteButton(_ cell: RentCell)
-}
-
 class RentCell: UITableViewCell {
-    
-    //Creating delegate property
-    var delegate: RentCellDelegate?
-    
-    
     
     @IBOutlet weak var rentCustomCell: UIView!
     @IBOutlet weak var propertyName: UILabel!
@@ -30,31 +19,65 @@ class RentCell: UITableViewCell {
     @IBOutlet weak var cellStackView: UIStackView!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var indexPath: IndexPath?
+    var isFavorite: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
         propertyImage.layer.cornerRadius = 5
+        rentStatus.applyRoundBorderStyle()
+        propertyImage.contentMode = .scaleAspectFill
+
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        indexPath = nil
+        favoriteButton.isSelected = false
+        updateFavoriteState()
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-        //setting delegate
-        delegate?.didTapFavoriteButton(self)
+        guard let indexPath = indexPath else {return}
+        isFavorite.toggle()
+        updateFavoriteState()
         
-        //Changing favorite button
-        if sender.currentImage == UIImage(systemName: "heart.fill") {
-            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        if isFavorite {
+            let rentData = property[indexPath.row]
+            let rentDataEntity = rentData.convertToRentEntity(context: DataModelManager.shared.context)
+            rentDataEntity?.isFavorite = isFavorite
+            DataModelManager.shared.saveContext()
         } else {
-            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            if let rentDataEntity = property[indexPath.row].convertToRentEntity(context: DataModelManager.shared.context) {
+                DataModelManager.shared.deleteItem(rentDataEntity)
+            }
         }
-        
     }
     
+     func updateFavoriteState() {
+        let imageName = isFavorite ? "heart.fill" : "heart"
+               let image = UIImage(systemName: imageName)
+               favoriteButton.setImage(image, for: .normal)
+               favoriteButton.setImage(image, for: .selected)
+               favoriteButton.tintColor = isFavorite ? .red : .gray
+    }
 }
+
+//MARK: - Status label.
+extension UILabel {
+    func applyRoundBorderStyle() {
+        self.layer.cornerRadius = 12
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+        self.textAlignment = .center
+        self.layer.borderColor = UIColor.green.cgColor
+    }
+}
+

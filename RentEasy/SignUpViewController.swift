@@ -26,8 +26,6 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         button_FieldStyle.buttonShape(signUpButton)
         button_FieldStyle.textFieldShape(firstNameTextField)
