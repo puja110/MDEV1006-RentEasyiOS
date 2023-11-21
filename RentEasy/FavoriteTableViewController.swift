@@ -91,6 +91,9 @@ extension FavoriteTableViewController: UITableViewDataSource {
         cell.propertyAddress.text = favoriteHouses.address
         cell.rentStatus.text = favoriteHouses.status
         cell.propertySize.text = favoriteHouses.size
+        let image = UIImage(systemName: "heart.fill")
+        cell.favoriteButton.setImage(image, for: .normal)
+        
         return cell
     }
     

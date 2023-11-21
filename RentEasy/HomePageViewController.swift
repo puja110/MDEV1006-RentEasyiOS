@@ -165,7 +165,7 @@ extension HomePageViewController: UITableViewDataSource {
         cell.favoriteButton.isSelected = houses.isFavorite
         
         cell.isFavorite = houses.isFavorite
-        cell.updateFavoriteState()
+        cell.updateButtonImage()
         cell.cellStackView.layer.cornerRadius = 5
         cell.layer.shadowColor = UIColor.lightGray.cgColor
         cell.layer.shadowRadius = 2

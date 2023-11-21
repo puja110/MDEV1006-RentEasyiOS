@@ -17,18 +17,10 @@ class DataModelManager {
     static let shared = DataModelManager()
     weak var delegate: DataModelManagerDelegate?
     
-    init() {}
-    
+    init() {}    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    //MARK: - SaveToggled Items
-    func favoriteToggling(with rentDataEntity: RentDataEntity) {
-        
-        rentDataEntity.isFavorite.toggle()
-        saveContext()
-        print("Item saved.")
-    }
-    
+    //MARK: - SAVE CONTEXT
     func saveContext() {
         do {
             try context.save()
@@ -37,8 +29,18 @@ class DataModelManager {
             print("Error saving: \(error)")
         }
     }
-    
-    
+
+    func existsInCoreData(_ rentData: RentData) -> Bool {
+        let fetchRequest: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", rentData.name)
+        do {
+            let existingItems = try context.fetch(fetchRequest)
+            return  existingItems.isEmpty == false
+        } catch {
+            print("Error")
+            return false
+        }
+    }
     
     //MARK: - LOAD ITEMS
     

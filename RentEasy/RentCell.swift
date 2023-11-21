@@ -28,45 +28,47 @@ class RentCell: UITableViewCell {
         propertyImage.layer.cornerRadius = 5
         rentStatus.applyRoundBorderStyle()
         propertyImage.contentMode = .scaleAspectFill
-
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         indexPath = nil
         favoriteButton.isSelected = false
-        updateFavoriteState()
-
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-        guard let indexPath = indexPath else {return}
-        isFavorite.toggle()
-        updateFavoriteState()
-        
-        if isFavorite {
-            let rentData = property[indexPath.row]
-            let rentDataEntity = rentData.convertToRentEntity(context: DataModelManager.shared.context)
-            rentDataEntity?.isFavorite = isFavorite
-            DataModelManager.shared.saveContext()
-        } else {
-            if let rentDataEntity = property[indexPath.row].convertToRentEntity(context: DataModelManager.shared.context) {
-                DataModelManager.shared.deleteItem(rentDataEntity)
+        guard let indexPath = indexPath else { return }
+            property[indexPath.row].isFavorite.toggle()
+            updateButtonImage()
+            if property[indexPath.row].isFavorite {
+                let rentData = property[indexPath.row]
+                let itemExists = DataModelManager.shared.existsInCoreData(rentData)
+
+                if itemExists == false {
+                    let rentDataEntity = rentData.convertToRentEntity(context: DataModelManager.shared.context)
+                    rentDataEntity?.isFavorite = rentData.isFavorite
+                    DataModelManager.shared.saveContext()
+                }
+            } else {
+                if let rentDataEntity = property[indexPath.row].convertToRentEntity(context: DataModelManager.shared.context) {
+                    DataModelManager.shared.context.delete(rentDataEntity)
+                    DataModelManager.shared.saveContext()
+                }
             }
-        }
     }
     
-     func updateFavoriteState() {
-        let imageName = isFavorite ? "heart.fill" : "heart"
-               let image = UIImage(systemName: imageName)
-               favoriteButton.setImage(image, for: .normal)
-               favoriteButton.setImage(image, for: .selected)
-               favoriteButton.tintColor = isFavorite ? .red : .gray
+    func updateButtonImage() {
+         guard let indexPath = indexPath else {return}
+           let rentData = property[indexPath.row]
+           let imageName = rentData.isFavorite ? "heart.fill" : "heart"
+           let image = UIImage(systemName: imageName)
+         
+           favoriteButton.setImage(image, for: .normal)
+           favoriteButton.setImage(image, for: .selected)
     }
 }
 
