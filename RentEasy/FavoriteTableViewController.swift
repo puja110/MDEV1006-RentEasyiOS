@@ -19,7 +19,7 @@ class FavoriteTableViewController: UIViewController, DataModelManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        items = DataModelManager.shared.loadItems()
+        items = DataModelManager.shared.loadFavouriteItems()
         print("Items: \(items.count)")
         tableView.reloadData()
     }
@@ -27,7 +27,7 @@ class FavoriteTableViewController: UIViewController, DataModelManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = DataModelManager.shared.loadItems()
+        items = DataModelManager.shared.loadFavouriteItems()
         DataModelManager.shared.delegate = self
         let cellNib = UINib(nibName: "RentCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "CustomCell")

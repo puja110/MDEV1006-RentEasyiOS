@@ -56,6 +56,24 @@ class DataModelManager {
         return []
     }
     
+    //MARK: - LOAD FAVOURITE ITEMS
+    
+    func loadFavouriteItems() -> [RentDataEntity] {
+        let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        
+        // Use a predicate to filter items where isFavourite is true
+            let predicate = NSPredicate(format: "isFavorite == true")
+            request.predicate = predicate
+        
+        do {
+            let fetchItems = try context.fetch(request)
+            return fetchItems
+        } catch {
+            print("Error fetching: \(error)")
+        }
+        return []
+    }
+    
     //MARK: - DELETING ITEMS
     func deleteItem(_ item: RentDataEntity) {
         context.delete(item)
