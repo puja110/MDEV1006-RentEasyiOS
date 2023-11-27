@@ -39,12 +39,12 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
         buttonTextField.viewLine(thirdStackView)
         buttonTextField.viewLine(fourthStackView)
         buttonTextField.viewLine(fifthStackView)
+
         
         houseName.text = rentData?.name
         houseAddress.setTitle(rentData?.address, for: .normal)
         houseSize.setTitle(rentData?.size, for: .normal)
         
-        //Custom Cell
         tableView.register(UINib(nibName: "TestimonialTableViewCell", bundle: nil), forCellReuseIdentifier: "TestimonialCell")
 
         collectionViewMain.register(DetailCollectionCell.self, forCellWithReuseIdentifier: "ImageCell")
@@ -75,6 +75,16 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
     
     @objc func doneButton() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: UIButton) {
+        
+        guard let propertyToShare = rentData else { return }
+        let name = propertyToShare.name
+        let address = propertyToShare.address
+        let shareMessage = "Check out this beautiful \(name) in \(address)"
+        let activity = UIActivityViewController(activityItems: [shareMessage, propertyToShare.image as Any], applicationActivities: nil)
+        present(activity, animated: true, completion: nil)
     }
 }
 

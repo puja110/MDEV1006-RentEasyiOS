@@ -39,6 +39,9 @@
 		3DBB4C7F2AD08C7B00B5ED8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C7D2AD08C7B00B5ED8D /* Main.storyboard */; };
 		3DBB4C812AD08C7C00B5ED8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C802AD08C7C00B5ED8D /* Assets.xcassets */; };
 		3DBB4C842AD08C7C00B5ED8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB4C822AD08C7C00B5ED8D /* LaunchScreen.storyboard */; };
+		3DBE41232B0D4D5A005E755B /* StudentHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBE41222B0D4D5A005E755B /* StudentHomeController.swift */; };
+		3DBE41252B0D4D79005E755B /* ContemporaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBE41242B0D4D79005E755B /* ContemporaryController.swift */; };
+		3DBE41272B0D829C005E755B /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBE41262B0D829C005E755B /* SearchFilterView.swift */; };
 		3DEA85402AFFC9F2007C3E78 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA853E2AFFC9F2007C3E78 /* DataModel.xcdatamodeld */; };
 		3DEA85652AFFDA76007C3E78 /* DataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA85642AFFDA76007C3E78 /* DataModelManager.swift */; };
 		3DEA85672B0030A8007C3E78 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA85662B0030A8007C3E78 /* UserInformation.swift */; };
@@ -79,6 +82,9 @@
 		3DBB4C802AD08C7C00B5ED8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DBB4C832AD08C7C00B5ED8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DBB4C852AD08C7C00B5ED8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DBE41222B0D4D5A005E755B /* StudentHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentHomeController.swift; sourceTree = "<group>"; };
+		3DBE41242B0D4D79005E755B /* ContemporaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContemporaryController.swift; sourceTree = "<group>"; };
+		3DBE41262B0D829C005E755B /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		3DEA853F2AFFC9F2007C3E78 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3DEA85642AFFDA76007C3E78 /* DataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelManager.swift; sourceTree = "<group>"; };
 		3DEA85662B0030A8007C3E78 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
@@ -143,6 +149,9 @@
 				3D75EA442AFEAE7F00714AE2 /* PostViewController.swift */,
 				3D958BD62B087CE10052555F /* CondoViewController.swift */,
 				3D958BD82B087EE40052555F /* HousesViewController.swift */,
+				3DBE41222B0D4D5A005E755B /* StudentHomeController.swift */,
+				3DBE41242B0D4D79005E755B /* ContemporaryController.swift */,
+				3DBE41262B0D829C005E755B /* SearchFilterView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +269,7 @@
 				3D6855ED2AF57E1D00806B2A /* FilterViewController.swift in Sources */,
 				3D3D70692B053D6F00B06BAB /* SessionTasksData.swift in Sources */,
 				3DA4F1CC2AE04C57002A359B /* RentData.swift in Sources */,
+				3DBE41272B0D829C005E755B /* SearchFilterView.swift in Sources */,
 				3D3D70672B053BD200B06BAB /* UrlSessionManager.swift in Sources */,
 				3D5D93162B09EBD700B1A6B0 /* DetailCollectionCell.swift in Sources */,
 				3D3040C02AD995EB000D1763 /* HomePageViewController.swift in Sources */,
@@ -270,6 +280,7 @@
 				3D958BD72B087CE10052555F /* CondoViewController.swift in Sources */,
 				3DEA85652AFFDA76007C3E78 /* DataModelManager.swift in Sources */,
 				3D5FDBC82ADF8E4E0059E022 /* RentCell.swift in Sources */,
+				3DBE41232B0D4D5A005E755B /* StudentHomeController.swift in Sources */,
 				3DBB4C782AD08C7B00B5ED8D /* AppDelegate.swift in Sources */,
 				3D1A9A352AD348EF007A34DB /* ResetPasswordViewController.swift in Sources */,
 				3D90BBD12AE4665100488A7F /* ProfileViewController.swift in Sources */,
@@ -277,6 +288,7 @@
 				3D778F922AE2ED0E009085EC /* Button_FieldStyle.swift in Sources */,
 				3D958BD92B087EE40052555F /* HousesViewController.swift in Sources */,
 				3D1A9A372AD34911007A34DB /* VerifyEmailViewController.swift in Sources */,
+				3DBE41252B0D4D79005E755B /* ContemporaryController.swift in Sources */,
 				3DBB4C7A2AD08C7B00B5ED8D /* SceneDelegate.swift in Sources */,
 				3DEA85402AFFC9F2007C3E78 /* DataModel.xcdatamodeld in Sources */,
 				3D76B9F02AF6E8F900EDBD98 /* SearchBarAppearance.swift in Sources */,

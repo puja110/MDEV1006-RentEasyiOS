@@ -14,6 +14,8 @@ class CondoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Condo Houses"
+
         navigationController?.setNavigationBarHidden(false, animated: true)
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
         

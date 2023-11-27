@@ -69,15 +69,18 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         guard let name = propetyNameField.text,
               let address = propertyAddressField.text,
               let size = propertySizeField.text,
-              let amount = propertyAmountField.text
+              let amount = propertyAmountField.text,
+              let description = descriptionField.text
         else
         {return}
         
-        DataModelManager.shared.uploadRentDataEntity(name: name, address: address, amount: amount, size: size, newImage: selectedImageData)
+        DataModelManager.shared.uploadRentDataEntity(name: name, address: address, amount: amount, size: size, newImage: selectedImageData, description: description)
         
         propetyNameField.text = ""
         propertyAddressField.text = ""
         propertyAmountField.text = ""
         propertySizeField.text = ""
+        descriptionField.text = ""
     }
+    
 }

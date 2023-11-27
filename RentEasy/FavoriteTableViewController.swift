@@ -19,6 +19,10 @@ class FavoriteTableViewController: UIViewController, DataModelManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.setNavigationBarHidden(true, animated: true)
+         
+    
+        
         items = DataModelManager.shared.loadFavouriteItems()
         print("Items: \(items.count)")
         tableView.reloadData()
@@ -43,7 +47,17 @@ class FavoriteTableViewController: UIViewController, DataModelManagerDelegate {
 //MARK: -  TableView Delegate
 extension FavoriteTableViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRentData = property[indexPath.row]
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "DetailPageID") as? DetailPageViewController {
+            destinationVC.selectedItem = selectedRentData
+            navigationController?.pushViewController(destinationVC, animated: true)
+        } else {
+            print("Failed destinationVC.")
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
     
     //DELETING
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

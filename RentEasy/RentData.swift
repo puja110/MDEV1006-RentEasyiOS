@@ -85,8 +85,7 @@ struct RentData {
     RentData(name: "House Nineteen", amount: "$1000", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseNineteen"), status: "Available", size: "Two Bedroom", testimonies: [RentData.Testimony(name: "Manushi Khadka", comment: "Beautiful Home. Nice Place to live")]),
     
     RentData(name: "House Twenty", amount: "$1000", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseTwenty"), status: "Available", size: "Two Bedroom", testimonies: [RentData.Testimony(name: "Manushi Khadka", comment: "Beautiful Home. Nice Place to live")])
-
-
+        
 ]
 
 //MARK: - CONVERTING RENTADA TO RENTDATAENTITY

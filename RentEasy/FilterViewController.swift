@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 
 class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
- 
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapToSafeArea: NSLayoutConstraint!
@@ -19,7 +19,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     let locationManager = CLLocationManager()
     var searchedDataResult: [RentData] = []
     var destinationVC: FilteredResultViewController?
-
+    
     var detailData: String?
     
     override func viewDidLoad() {
@@ -27,20 +27,20 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         
         destinationVC = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "FilteredResult") as? FilteredResultViewController
-        
         navigationItem.title = "Search"
         navigationController?.setNavigationBarHidden(false, animated: true)
         
         searchTextField.delegate = self
-        searchBarAppearance.glassAndFilterTextField(textField: searchTextField)
+        searchBarAppearance.magnifyingGlassOnly(searchTextField)
+        filterButton()
         locationService()
     }
-
+    
     
     //MARK: - Location configuration
     func locationService() {
-            locationManager.delegate = self
-            locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +58,9 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         }
     }
     
+    
+    
+    
     func presentLocation(_ location: CLLocation) {
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -67,6 +70,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         pin.coordinate = coordinate
         mapView.addAnnotation(pin)
     }
+
     
     //MARK: - SEARCH IMPLEMENTATION
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -81,10 +85,11 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     }
     
     func filteredResults(for searchedData: String) -> [RentData] {
-        let resultData = property.filter { result in
-            return result.name.localizedCaseInsensitiveContains(searchedData)
+        let resultData = property.filter { rentData in
+            return rentData.name.contains(searchedData) ||
+            rentData.address.contains(searchedData) ||
+            rentData.size.contains(searchedData)
         }
-        print("Count: \(resultData.count)")
         return resultData
     }
     
@@ -93,10 +98,10 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           textField.resignFirstResponder()
-           presentVC()
-           return true
-       }
+        textField.resignFirstResponder()
+        presentVC()
+        return true
+    }
     
     //MARK: - BOTTOM SHEET
     func presentVC() {
@@ -107,7 +112,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
             print("Results Count \(results.count)")
             destinationVC.filteredRentData = results
             destinationVC.modalPresentationStyle = .automatic
-
+            
             if let bottomSheet = destinationVC.presentationController as? UISheetPresentationController {
                 bottomSheet.detents = [.medium(), .large()]
                 bottomSheet.largestUndimmedDetentIdentifier = .medium
@@ -120,5 +125,32 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         
     }
     
-
+    
+    func filterButton() {
+        let filterSymbol = UIImage(systemName: "slider.vertical.3")
+        let filterButton = UIButton(type: .custom)
+        filterButton.setImage(filterSymbol, for: .normal)
+        filterButton.tintColor = UIColor.black
+        
+        filterButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        let paddingRight = UIView(frame: filterButton.frame)
+        paddingRight.addSubview(filterButton)
+        searchTextField.rightView = paddingRight
+        searchTextField.rightViewMode = .always
+        
+        filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func filterButtonPressed() {
+        let destinationVC = UIStoryboard(name: "Main", bundle: nil)
+        if let searchFilter = destinationVC.instantiateViewController(withIdentifier: "SearchFilterView") as? SearchFilterView {
+            if searchFilter.parent == nil {
+                let navigationController = UINavigationController(rootViewController: searchFilter)
+                navigationController.modalPresentationStyle = .popover
+                self.present(navigationController, animated: true)
+            } else {
+               // DO NOTHING
+            }
+        }
+    }
 }

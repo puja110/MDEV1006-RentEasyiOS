@@ -61,6 +61,21 @@ struct SearchBarAppearance {
          textField.rightViewMode = .always
     }
     
+    func magnifyingGlassOnly(_ textField: UITextField) {
+        
+        let magnifyingGlassSymbol = UIImage(systemName: "magnifyingglass")
+        let magnifyingGlassImageView = UIImageView(image: magnifyingGlassSymbol)
+        magnifyingGlassImageView.backgroundColor = UIColor(named: "systemGray")
+        magnifyingGlassImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        magnifyingGlassImageView.tintColor = UIColor.black
+        magnifyingGlassImageView.contentMode = .center
+        
+        let paddingLeft = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        paddingLeft.addSubview(magnifyingGlassImageView)
+        textField.leftView = paddingLeft
+        textField.leftViewMode = .always
+    }
+    
     
 }
 

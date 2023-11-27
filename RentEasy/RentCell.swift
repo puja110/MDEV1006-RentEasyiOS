@@ -54,10 +54,9 @@ class RentCell: UITableViewCell {
                     DataModelManager.shared.saveContext()
                 }
             } else {
-                if let rentDataEntity = property[indexPath.row].convertToRentEntity(context: DataModelManager.shared.context) {
-                    DataModelManager.shared.context.delete(rentDataEntity)
-                    DataModelManager.shared.saveContext()
-                }
+                let rentDataEntity = property[indexPath.row].convertToRentEntity(context: DataModelManager.shared.context)
+                DataModelManager.shared.deleteItem(rentDataEntity!)
+                DataModelManager.shared.saveContext()
             }
     }
     

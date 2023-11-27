@@ -61,7 +61,6 @@ class DataModelManager {
     func loadFavouriteItems() -> [RentDataEntity] {
         let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
         
-        // Use a predicate to filter items where isFavourite is true
             let predicate = NSPredicate(format: "isFavorite == true")
             request.predicate = predicate
         
@@ -134,13 +133,14 @@ class DataModelManager {
     }
     
     //MARK: - UploadData
-    func uploadRentDataEntity(name: String, address: String, amount: String, size: String, newImage: Data?) {
+    func uploadRentDataEntity(name: String, address: String, amount: String, size: String, newImage: Data?, description: String) {
         let uploadData = RentDataEntity(context: context)
         uploadData.name = name
         uploadData.address = address
         uploadData.amount = amount
         uploadData.size = size
         uploadData.image = newImage
+        uploadData.itemDescription = description
         
         saveContext()
         print("Saved Successfully")

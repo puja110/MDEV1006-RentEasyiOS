@@ -1,26 +1,30 @@
 //
-//  HousesViewController.swift
+//  ContemporaryController.swift
 //  RentEasy
 //
-//  Created by CodeSOMPs on 2023-11-18.
+//  Created by Oladipupo Olasile on 2023-11-21.
 //
 
 import UIKit
 
-class HousesViewController: UIViewController {
-    
+class ContemporaryController: UIViewController {
+
     @IBOutlet weak var tableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Family Homes"
+
+        navigationItem.title = "Contemporary Houses"
         navigationController?.setNavigationBarHidden(false, animated: true)
-        tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
+        tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")  
     }
+    
 }
 
-extension HousesViewController: UITableViewDataSource {
+
+
+extension ContemporaryController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return property.count
     }
@@ -46,14 +50,14 @@ extension HousesViewController: UITableViewDataSource {
     }
 }
 
-extension HousesViewController: UITableViewDelegate {
+extension ContemporaryController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            let selectedRentData = property[indexPath.row]
            if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "DetailPageID") as? DetailPageViewController {
                destinationVC.selectedItem = selectedRentData
                navigationController?.pushViewController(destinationVC, animated: true)
            } else {
-               print("Failed destinationVC.")
+               print("Failed.")
            }
            tableView.deselectRow(at: indexPath, animated: true)
        }

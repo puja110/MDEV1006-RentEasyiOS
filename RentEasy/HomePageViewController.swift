@@ -7,9 +7,11 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UITextFieldDelegate {
+class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     
     //MARK: - IBOUTLETS
+    
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var categoryBackgroundStack3: UIStackView!
     @IBOutlet weak var categoryBackgroundStack1: UIStackView!
     @IBOutlet weak var categoryBackgroundStack2: UIStackView!
@@ -75,11 +77,16 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
         let categoryTwoGesture = UITapGestureRecognizer(target: self, action: #selector(stackTwoViewTapped))
         categoryBackgroundStack2.addGestureRecognizer(categoryTwoGesture)
         
+        let categoryThreeGesture = UITapGestureRecognizer(target: self, action: #selector(stackThreeViewTapped))
+        categoryBackgroundStack.addGestureRecognizer(categoryThreeGesture)
+        
+        let categoryFourGesture = UITapGestureRecognizer(target: self, action: #selector(stackFourViewTapped))
+        categoryBackgroundStack3.addGestureRecognizer(categoryFourGesture)
+        
         tableView.delegate = self
         tableView.dataSource = self
         hScrollView.delegate = self
         
-        //Custom Cell
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
     }
     
@@ -91,6 +98,40 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     
     @objc func stackTwoViewTapped() {
         performSegue(withIdentifier: "FamilyHome", sender: self)
+    }
+    
+    @objc func stackThreeViewTapped() {
+        performSegue(withIdentifier: "StudentView", sender: self)
+    }
+
+    @objc func stackFourViewTapped() {
+        performSegue(withIdentifier: "ContemporaryView", sender: self)
+    }
+    
+    @objc func mapDoneButton() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - HOMEPAGE MAP
+    @IBAction func mapIconPressed(_ sender: UIButton) {
+        
+        let destinationVC = UIStoryboard(name: "Main", bundle: nil)
+        if let filterViewController = destinationVC.instantiateViewController(withIdentifier: "FilterView") as? FilterViewController {
+            filterViewController.view.backgroundColor = UIColor.systemGray5
+            filterViewController.searchTextField.isHidden = true
+            filterViewController.mapToSafeArea.constant = 10
+            if filterViewController.parent == nil {
+                let navigationController = UINavigationController(rootViewController: filterViewController)
+                filterViewController.title = "Your Current Location"
+                filterViewController.sheetPresentationController?.preferredCornerRadius = 100
+                let button = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(mapDoneButton))
+                filterViewController.navigationItem.rightBarButtonItem = button
+                navigationController.modalPresentationStyle = .popover
+                self.present(navigationController, animated: true)
+            } else {
+               // DO NOTHING
+            }
+        }
     }
     
     //MARK: - Navigating to FilterViewController
@@ -119,6 +160,14 @@ class HomePageViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - HOMEPAGE ANIMATION
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        topSeeMore.isHidden = true
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        topSeeMore.isHidden = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
             let hide: CGFloat = categoryViewHeight

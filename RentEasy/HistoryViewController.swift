@@ -9,18 +9,15 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     
-    
-    
-    @IBOutlet weak var searchBarTextField: UITextField!
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var allButton: UIButton!
-    @IBOutlet weak var holdButton: UIButton!
-    @IBOutlet weak var soldButton: UIButton!
+    @IBOutlet weak var availableButton: UIButton!
+    @IBOutlet weak var bookedButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var allHistoryData = allHistory
-    var soldHistoryData = soldHistory
-    var holdHistoryData = holdHistory
+    var availableHistoryData = soldHistory
+    var bookedHistoryData = holdHistory
     var currentDataSource: [HistoryData] = allHistory
     var searchBarAppearance = SearchBarAppearance()
     
@@ -29,9 +26,8 @@ class HistoryViewController: UIViewController {
         
         //Button Appearance
         changeButtonAppearance(myButton: allButton)
-        changeButtonAppearance(myButton: holdButton)
-        changeButtonAppearance(myButton: soldButton)
-        searchBarAppearance.glassAndFilterTextField(textField: searchBarTextField)
+        changeButtonAppearance(myButton: availableButton)
+        changeButtonAppearance(myButton: bookedButton)
         tableView.reloadData()
         tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
     }
@@ -44,15 +40,15 @@ class HistoryViewController: UIViewController {
     }
     
     
-    @IBAction func holdButtonPressed(_ sender: UIButton) {
-        currentDataSource = holdHistoryData
+    @IBAction func availableButtonPressed(_ sender: UIButton) {
+        currentDataSource = bookedHistoryData
         historyLabel.text = "Available History"
         sender.backgroundColor = UIColor.red
         tableView.reloadData()
     }
     
-    @IBAction func soldButtonPressed(_ sender: UIButton) {
-        currentDataSource = soldHistoryData
+    @IBAction func bookedButtonPressed(_ sender: UIButton) {
+        currentDataSource = availableHistoryData
         historyLabel.text = "Booked History"
         sender.backgroundColor = UIColor.red
         tableView.reloadData()
