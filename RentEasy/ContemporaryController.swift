@@ -2,7 +2,7 @@
 //  ContemporaryController.swift
 //  RentEasy
 //
-//  Created by Oladipupo Olasile on 2023-11-21.
+//  Created by CodeSomps on 2023-11-21.
 //
 
 import UIKit
