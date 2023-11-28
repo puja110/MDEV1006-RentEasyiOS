@@ -11,8 +11,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBOutlet weak var userEmailAddress: UILabel!
-    @IBOutlet weak var userLastName: UILabel!
-    @IBOutlet weak var userFirstName: UILabel!
+    @IBOutlet weak var clientName: UILabel!
     @IBOutlet weak var profileDetailsStackView: UIStackView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
@@ -35,8 +34,8 @@ class ProfileViewController: UIViewController {
             let firstName = userDetails.firstName
             let lastName = userDetails.lastName
             let emailAddress = userDetails.emailAddress
-            userFirstName.text = firstName
-            userLastName.text = lastName
+            clientName.text = "\(firstName ?? "nil")  \(lastName ?? "nil")"
+        
             userEmailAddress.text = emailAddress
         }
     }

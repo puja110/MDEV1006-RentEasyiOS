@@ -31,7 +31,7 @@ class FavoriteTableViewController: UIViewController, DataModelManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = DataModelManager.shared.loadFavouriteItems()
+        items = DataModelManager.shared.loadItems()
         DataModelManager.shared.delegate = self
         let cellNib = UINib(nibName: "RentCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "CustomCell")
