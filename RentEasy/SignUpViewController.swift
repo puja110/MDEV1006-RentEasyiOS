@@ -9,8 +9,6 @@ import UIKit
 import CoreData
 
 class SignUpViewController: UIViewController {
-    
-    
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,7 +20,6 @@ class SignUpViewController: UIViewController {
     var button_FieldStyle = Button_FieldStyle()
     let dataModelManager = DataModelManager.shared
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +35,6 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-      
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
               let phoneNumber = phoneNumberTextField.text,
@@ -46,49 +42,44 @@ class SignUpViewController: UIViewController {
               let lastName = lastNameTextField.text,
               let confirmPassword = confirmPasswordTextField.text
         else {return}
-            
-        guard !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty, !phoneNumber.isEmpty, !firstName.isEmpty, !lastName.isEmpty else {
-            print("All fields must be filled")
-         showAlert(message: "All fields must be filled.")
-            return
-            }
-            
-            guard password == confirmPassword else {
-                showAlert(message: "Password do not match")
-                return
-            }
         
-            // Registration successful
+        guard !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty, !phoneNumber.isEmpty, !firstName.isEmpty, !lastName.isEmpty else {
+            alertMessage(message: "All fields must be filled.")
+            return
+        }
+        
+        guard password == confirmPassword else {
+            alertMessage(message: "Password do not match")
+            return
+        }
         dataModelManager.userRegistration(email: email,
                                           password: password,
                                           firstName: firstName,
                                           lastName: lastName,
                                           phoneNumber: phoneNumber,
                                           context: context)
-            
-         
+        
         let alertController = UIAlertController(title: "Successful", message: "Go to Login Page", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .destructive) { _ in
+        let oK = UIAlertAction(title: "OK", style: .destructive) { _ in
             self.singUpComplete()
         }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-        }
-        
-
-        func singUpComplete() {
-            guard let loginVC = storyboard?.instantiateViewController(withIdentifier: "LoginPage") else {
-                return
-            }
-            loginVC.modalPresentationStyle = .fullScreen
-            present(loginVC, animated: true, completion: nil)
-        }
-    
-    func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .destructive)
-        alertController.addAction(okAction)
+        alertController.addAction(oK)
         present(alertController, animated: true, completion: nil)
     }
-        
+
+    func singUpComplete() {
+        guard let loginVC = storyboard?.instantiateViewController(withIdentifier: "LoginPage") else {
+            return
+        }
+        loginVC.modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true, completion: nil)
+    }
+
+    func alertMessage(message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let oK = UIAlertAction(title: "OK", style: .destructive)
+        alertController.addAction(oK)
+        present(alertController, animated: true, completion: nil)
+    }
+    
 }

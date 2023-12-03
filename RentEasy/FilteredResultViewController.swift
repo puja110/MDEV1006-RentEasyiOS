@@ -13,7 +13,7 @@ class FilteredResultViewController: UIViewController {
     @IBOutlet weak var resultCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
    
-    var filteredRentData: [RentData] = [] {
+    var filteredRentData: [RentDataEntity] = [] {
            didSet {
                print(filteredRentData.count)
            }
@@ -47,10 +47,14 @@ extension FilteredResultViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! RentCell
         let result = filteredRentData[indexPath.row]
         cell.propertyName.text = result.name
-        cell.propertyImage.image = result.image
-        cell.propertyAmount.text = result.amount
+        if let imageData = result.image, let image = UIImage(data: imageData) {
+            cell.propertyImage.image = image
+        } else {
+            cell.propertyImage.image = nil
+        }
+        cell.propertyAmount.text = "$\(result.amount ?? "1000") /month"
         cell.propertyAddress.text = result.address
-        cell.rentStatus.text = result.status
+        cell.rentStatus.text = result.status ?? "Available"
         cell.propertySize.text = result.size
         cell.cellStackView.layer.cornerRadius = 5
         cell.layer.shadowColor = UIColor.lightGray.cgColor

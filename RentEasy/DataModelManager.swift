@@ -9,68 +9,90 @@ import CoreData
 import UIKit
 import Foundation
 
-protocol DataModelManagerDelegate: AnyObject {
-    func didSaveItem()
-}
-
 class DataModelManager {
-    static let shared = DataModelManager()
-    weak var delegate: DataModelManagerDelegate?
     
-    init() {}    
+    static let shared = DataModelManager()
+    init() {}
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: - SAVE CONTEXT
     func saveContext() {
         do {
             try context.save()
-            delegate?.didSaveItem()
         } catch {
             print("Error saving: \(error)")
         }
     }
-
-    func existsInCoreData(_ rentData: RentData) -> Bool {
-        let fetchRequest: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", rentData.name)
-        do {
-            let existingItems = try context.fetch(fetchRequest)
-            return  existingItems.isEmpty == false
-        } catch {
-            print("Error")
-            return false
-        }
-    }
     
-    //MARK: - LOAD ITEMS
-    
-    func loadItems() -> [RentDataEntity] {
+    //MARK: - LOAD ALL ITEMS
+    func loadAllItems() -> [RentDataEntity] {
         let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
         
         do {
             let fetchItems = try context.fetch(request)
             return fetchItems
         } catch {
-            print("Error fetching: \(error)")
+            print("Error fetching")
         }
         return []
+    }
+    
+    //MARK: - LOAD POSTED ITEMS
+    func loadPostedItems() -> [RentDataEntity] {
+        let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "postedItem == true")
+        
+        do {
+            let fetchItems = try context.fetch(request)
+            return fetchItems
+        } catch {
+            print("Error")
+            return []
+        }
+    }
+    
+    //MARK: - LOAD BOOKED ITEMS
+    
+    func loadBookedItems() -> [RentDataEntity] {
+        let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "bookedItem == true")
+        
+        do {
+            let fetchItems = try context.fetch(request)
+            return fetchItems
+        } catch {
+            print("Error")
+            return []
+        }
     }
     
     //MARK: - LOAD FAVOURITE ITEMS
-    
     func loadFavouriteItems() -> [RentDataEntity] {
         let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
-        
-            let predicate = NSPredicate(format: "isFavorite == true")
-            request.predicate = predicate
+        request.predicate = NSPredicate(format: "isFavorite == true")
         
         do {
             let fetchItems = try context.fetch(request)
             return fetchItems
         } catch {
-            print("Error fetching: \(error)")
+            print("Error")
+            return []
         }
-        return []
+    }
+    
+    //MARK: - SLIDER FETCH REQUEST
+    
+    func sliderAmountSearch(sliderAmount: Int) -> [RentDataEntity] {
+        let fetchRequest: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "amount == %@", argumentArray: [sliderAmount])
+        
+        do {
+            let fetchedResults = try context.fetch(fetchRequest)
+            return fetchedResults
+        } catch {
+            print("Error Fetching")
+            return []
+        }
     }
     
     //MARK: - DELETING ITEMS
@@ -92,7 +114,7 @@ class DataModelManager {
             try context.save()
             print("saved successfully")
         } catch {
-            print("registration error \(error)")
+            print("registration error")
         }
     }
     
@@ -112,7 +134,7 @@ class DataModelManager {
                 return false
             }
         } catch {
-            print("Unable to fetch user: \(error)")
+            print("No User Found")
             return false
         }
     }
@@ -127,7 +149,7 @@ class DataModelManager {
             let userDetails = try context.fetch(request)
             return userDetails.first
         } catch {
-            print("Error: \(error)")
+            print("Error")
             return nil
         }
     }
@@ -141,23 +163,23 @@ class DataModelManager {
         uploadData.size = size
         uploadData.image = newImage
         uploadData.itemDescription = description
-        
+        uploadData.postedItem = true
         saveContext()
         print("Saved Successfully")
     }
     
     //DELETING USER
-    func deleteUserDetails() {
+    func deleteUser() {
         let request: NSFetchRequest<UserDetails> = UserDetails.fetchRequest()
         do {
-            let userInfo = try context.fetch(request)
-            for user in userInfo {
+            let users = try context.fetch(request)
+            for user in users {
                 context.delete(user)
             }
             saveContext()
         } catch {
-            print("Error deleting user: \(error)")
+            print("Error deleting")
         }
     }
-
+    
 }

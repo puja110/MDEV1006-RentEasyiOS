@@ -8,27 +8,34 @@
 import UIKit
 
 class DetailPageViewController: UIViewController, UIViewControllerTransitioningDelegate {
-        
+      
+    @IBOutlet weak var favButtonImage: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionViewMain: UICollectionView!
     @IBOutlet weak var houseName: UILabel!
     @IBOutlet weak var houseAddress: UIButton!
     @IBOutlet weak var houseSize: UIButton!
-    
     @IBOutlet weak var firstStackView: UIStackView!
     @IBOutlet weak var secondStackView: UIStackView!
     @IBOutlet weak var thirdStackView: UIStackView!
+    @IBOutlet weak var bookButton: UIButton!
     @IBOutlet weak var fourthStackView: UIStackView!
     @IBOutlet weak var fifthStackView: UIStackView!
     
     var buttonTextField = Button_FieldStyle()
-    var rentData: RentData?
-    var selectedItem: RentData? {
+    var rentDataEntityProperty: RentDataEntity?
+    var selectedItem: RentDataEntity? {
           didSet {
-             rentData = selectedItem
+             rentDataEntityProperty = selectedItem
               tableView?.reloadData()
           }
       }
+    
+    var favorite: Bool = false {
+        didSet {
+            favoriteButtonState()
+        }
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +45,24 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
         buttonTextField.viewLine(secondStackView)
         buttonTextField.viewLine(thirdStackView)
         buttonTextField.viewLine(fourthStackView)
-        buttonTextField.viewLine(fifthStackView)
+        
+        houseName.text = rentDataEntityProperty?.name
+        houseAddress.setTitle(rentDataEntityProperty?.address, for: .normal)
+        houseSize.setTitle(rentDataEntityProperty?.size, for: .normal)
+        favoriteButtonState()
 
-        
-        houseName.text = rentData?.name
-        houseAddress.setTitle(rentData?.address, for: .normal)
-        houseSize.setTitle(rentData?.size, for: .normal)
-        
         tableView.register(UINib(nibName: "TestimonialTableViewCell", bundle: nil), forCellReuseIdentifier: "TestimonialCell")
 
         collectionViewMain.register(DetailCollectionCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionViewMain.delegate = self
         collectionViewMain.dataSource = self
-
+        
+        if selectedItem?.bookedItem == true {
+            bookButton.isEnabled = false
+            bookButton.setTitle("Not Available", for: .normal)
+        } else {
+            bookButton.isEnabled = true            
+        }
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
@@ -77,48 +89,61 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
         dismiss(animated: true, completion: nil)
     }
     
+    func favoriteButtonState() {
+        guard let image = UIImage(systemName: favorite ? "heart.fill" : "heart") else {return}
+        favButtonImage?.setImage(image, for: .normal)
+    }
+    
     @IBAction func shareButtonPressed(_ sender: UIButton) {
-        
-        guard let propertyToShare = rentData else { return }
+        guard let propertyToShare = rentDataEntityProperty else { return }
         let name = propertyToShare.name
         let address = propertyToShare.address
-        let shareMessage = "Check out this beautiful \(name) in \(address)"
+        let shareMessage = "Check out this beautiful \(name ?? "nil") in \(address ?? "nil")"
         let activity = UIActivityViewController(activityItems: [shareMessage, propertyToShare.image as Any], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
     }
+    
+    @IBAction func bookingButtonPressed(_ sender: UIButton) {
+        presentAlert()
+    }
+    
+    func presentAlert() {
+        let customAlert = CustomAlert(nibName: "CustomAlert", bundle: nil)
+        customAlert.houses = selectedItem
+        customAlert.modalPresentationStyle = .overCurrentContext
+        present(customAlert, animated: true, completion: nil)
+    }
 }
 
-
 extension DetailPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionViewMain.dequeueReusableCell(withReuseIdentifier: "ImageCells", for: indexPath) as! DetailCollectionCell
-        if let rentData = rentData {
-            cell.imageForCell.image = rentData.image
-            cell.imageForCell.layer.cornerRadius = 5
-           }
+        if let rentDataEntity = rentDataEntityProperty,
+           let imageData = rentDataEntity.image {
+            cell.imageForCell.image = UIImage(data: imageData)
+            cell.imageForCell.contentMode = .scaleAspectFill
+            cell.imageForCell.clipsToBounds = true
+        } else {
+            cell.imageForCell.image = nil
+        }
         return cell
     }
 }
 
 extension DetailPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let testimonies = rentData?.testimonies {
-               return testimonies.count
-           } else {
-               return 0
-           }
+        return testimonies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TestimonialCell", for: indexPath)as! TestimonialTableViewCell
-        let comments = rentData?.testimonies[indexPath.row]
-        cell.reviewersName.text = comments?.name
-        cell.reviewersComment.text = comments?.comment
+        let comments = testimonies[indexPath.row]
+        cell.reviewersName.text = comments.name
+        cell.reviewersComment.text = comments.comment
         return cell
     }
     
@@ -126,5 +151,3 @@ extension DetailPageViewController: UITableViewDataSource {
         return 160
     }
 }
-
-

@@ -33,35 +33,32 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     @IBOutlet weak var welcomeToRentEasy: UILabel!
     @IBOutlet weak var topSeeMore: UIButton!
     
-    //MARK: - Declared Variables & Constants
+    //MARK: - Variables & Constants
     var dataModelManager = DataModelManager()
     var searchBarAppearance = SearchBarAppearance()
     var buttonTextField = Button_FieldStyle()
     let categoryViewHeight: CGFloat = 160
-    
+    var rentDataEntityProperty: [RentDataEntity] = []
     
     //MARK: - CYCLE
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        rentDataEntityProperty = dataModelManager.loadAllItems()
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataModelManager.saveContext()
-        //MARK: CUSTOMIZATION
+        rentDataEntityProperty = dataModelManager.loadAllItems()
         searchTextField.delegate = self
         searchBarAppearance.glassAndFilterTextField(textField: searchTextField)
         searchTextField.becomeFirstResponder()
-        //customizing tableVIew
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        
-        categoryButton1.topCornerRadius(radius: 10)
-        categoryButton2.topCornerRadius(radius: 10)
-        categoryButton3.topCornerRadius(radius: 10)
-        categoryButton4.topCornerRadius(radius: 10)
+
         buttonTextField.categoryStackAppearance(categoryBackgroundStack)
         buttonTextField.categoryStackAppearance(categoryBackgroundStack2)
         buttonTextField.categoryStackAppearance(categoryBackgroundStack1)
@@ -86,7 +83,6 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         tableView.delegate = self
         tableView.dataSource = self
         hScrollView.delegate = self
-        
         tableView.register(UINib(nibName: "RentCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
     }
     
@@ -103,7 +99,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     @objc func stackThreeViewTapped() {
         performSegue(withIdentifier: "StudentView", sender: self)
     }
-
+    
     @objc func stackFourViewTapped() {
         performSegue(withIdentifier: "ContemporaryView", sender: self)
     }
@@ -114,7 +110,6 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     
     //MARK: - HOMEPAGE MAP
     @IBAction func mapIconPressed(_ sender: UIButton) {
-        
         let destinationVC = UIStoryboard(name: "Main", bundle: nil)
         if let filterViewController = destinationVC.instantiateViewController(withIdentifier: "FilterView") as? FilterViewController {
             filterViewController.view.backgroundColor = UIColor.systemGray5
@@ -129,7 +124,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 navigationController.modalPresentationStyle = .popover
                 self.present(navigationController, animated: true)
             } else {
-               // DO NOTHING
+                // DO NOTHING
             }
         }
     }
@@ -139,7 +134,6 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         performSegue(withIdentifier: "FavoriteView", sender: self)
     }
     
-    //Searchbar edit.
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
@@ -148,10 +142,11 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailPage" {
             if let destinationVC = segue.destination as? DetailPageViewController {
-                if let selectedItem = sender as? RentData {
+                if let selectedItem = sender as? RentDataEntity {
                     destinationVC.selectedItem = selectedItem
+                    destinationVC.favorite = selectedItem.isFavorite
                 } else {
-                    print("Not RentData object")
+                    print("Not entity object")
                 }
             } else {
                 print("DestinationVC not found.")
@@ -171,7 +166,6 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
             let hide: CGFloat = categoryViewHeight
-            // Getting lowerstackview height
             let lowerStackHeight = tableView.contentOffset.y
             if lowerStackHeight >= hide {
                 hScrollView.isHidden = true
@@ -188,7 +182,7 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 lowerAndUpperStackConstraints.constant = 180
                 seeMoreButton.isHidden = false
             }
-            UIView.animate(withDuration: 0.3) {self.view.layoutIfNeeded()}
+            UIView.animate(withDuration: 0.2) {self.view.layoutIfNeeded()}
         }
     }
     
@@ -198,29 +192,38 @@ class HomePageViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 extension HomePageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return property.count
+        return rentDataEntityProperty.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! RentCell
+        let houses = rentDataEntityProperty[indexPath.row]
+        cell.houses = houses
         cell.indexPath = indexPath
-        let houses = property[indexPath.row]
         cell.propertyName.text = houses.name
-        cell.propertyImage.image = houses.image
-        cell.propertyAmount.text = houses.amount
+        if let imageData = houses.image, let image = UIImage(data: imageData) {
+            cell.propertyImage.image = image
+        } else {
+            cell.propertyImage.image = nil
+        }
+        cell.propertyAmount.text = "$\(houses.amount ?? "1000") /month"
         cell.propertyAddress.text = houses.address
-        cell.rentStatus.text = houses.status
+        if houses.bookedItem == true {
+            cell.rentStatus.textColor = UIColor.red
+            cell.rentStatus.text = "Booked"
+        } else {
+            cell.rentStatus.textColor = UIColor.green
+            cell.rentStatus.text = "Available"
+        }
+     
         cell.propertySize.text = houses.size
         cell.favoriteButton.isSelected = houses.isFavorite
-        
-        cell.isFavorite = houses.isFavorite
-        cell.updateButtonImage()
+        cell.updateButtonImage(isFavorite: houses.isFavorite)
         cell.cellStackView.layer.cornerRadius = 5
         cell.layer.shadowColor = UIColor.lightGray.cgColor
         cell.layer.shadowRadius = 2
         cell.layer.shadowOffset = CGSize(width: 1, height: 1)
         cell.layer.shadowOpacity = 1
-        
         return cell
     }
 }
@@ -229,7 +232,7 @@ extension HomePageViewController: UITableViewDataSource {
 extension HomePageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedRentData = property[indexPath.row]
+        let selectedRentData = rentDataEntityProperty[indexPath.row]
         performSegue(withIdentifier: "DetailPage", sender: selectedRentData)
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -239,22 +242,5 @@ extension HomePageViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-}
-
-
-//MARK: - ButtonExtension
-extension UIButton {
-    func topCornerRadius(radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds,
-                                byRoundingCorners: [.topLeft, .topRight],
-                                cornerRadii: CGSize(width: radius, height: radius))
-        
-        let masking = CAShapeLayer()
-        masking.path = path.cgPath
-        layer.mask = masking
     }
 }

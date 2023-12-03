@@ -10,34 +10,27 @@ import UIKit
 
 
 struct SearchBarAppearance {
-    
     func glassAndFilterTextField(textField: UITextField) {
-        //MagnifyingGlass
         let magnifyingGlassSymbol = UIImage(systemName: "magnifyingglass")
-        let magnifyingGlassImageView = UIImageView(image: magnifyingGlassSymbol)
-        magnifyingGlassImageView.backgroundColor = UIColor(named: "systemGray")
-        magnifyingGlassImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-        magnifyingGlassImageView.tintColor = UIColor.black
-        magnifyingGlassImageView.contentMode = .center
-        
-        let paddingLeft = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
-        paddingLeft.addSubview(magnifyingGlassImageView)
-        textField.leftView = paddingLeft
+        let magnifyingGlassView = UIImageView(image: magnifyingGlassSymbol)
+        magnifyingGlassView.backgroundColor = UIColor(named: "systemGray")
+        magnifyingGlassView.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        magnifyingGlassView.tintColor = UIColor.black
+        magnifyingGlassView.contentMode = .center
+        let paddingConstant = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        paddingConstant.addSubview(magnifyingGlassView)
+        textField.leftView = paddingConstant
         textField.leftViewMode = .always
         
-        // Filter Button
-         let filterSymbol = UIImage(systemName: "slider.vertical.3")
-         let filterButton = UIButton(type: .custom)
-         filterButton.setImage(filterSymbol, for: .normal)
-         filterButton.tintColor = UIColor.black
-
-        filterButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-         let paddingRight = UIView(frame: filterButton.frame)
-         paddingRight.addSubview(filterButton)
+         let filterImage = UIImage(systemName: "slider.vertical.3")
+         let filterImageButton = UIButton(type: .custom)
+         filterImageButton.setImage(filterImage, for: .normal)
+         filterImageButton.tintColor = UIColor.black
+        filterImageButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+         let paddingRight = UIView(frame: filterImageButton.frame)
+         paddingRight.addSubview(filterImageButton)
          textField.rightView = paddingRight
          textField.rightViewMode = .always
-        
-        //Custom Radius and Shadow
         textField.layer.cornerRadius = 15.0
         textField.layer.masksToBounds = true
         textField.layer.borderWidth = 0.2
@@ -46,36 +39,17 @@ struct SearchBarAppearance {
         textField.layer.shadowOffset = CGSize(width: 2, height: 2)
         textField.layer.shadowOpacity = 0.9
     }
-    
-    func secureEyeView(_ textField: UITextField) {
-        // Filter Button
-         let filterSymbol = UIImage(named: "secureEye")
-         let filterButton = UIButton(type: .custom)
-         filterButton.setImage(filterSymbol, for: .normal)
-         filterButton.tintColor = UIColor.black
-
-        filterButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-         let paddingRight = UIView(frame: filterButton.frame)
-         paddingRight.addSubview(filterButton)
-         textField.rightView = paddingRight
-         textField.rightViewMode = .always
-    }
-    
     func magnifyingGlassOnly(_ textField: UITextField) {
-        
-        let magnifyingGlassSymbol = UIImage(systemName: "magnifyingglass")
-        let magnifyingGlassImageView = UIImageView(image: magnifyingGlassSymbol)
-        magnifyingGlassImageView.backgroundColor = UIColor(named: "systemGray")
-        magnifyingGlassImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-        magnifyingGlassImageView.tintColor = UIColor.black
-        magnifyingGlassImageView.contentMode = .center
-        
-        let paddingLeft = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
-        paddingLeft.addSubview(magnifyingGlassImageView)
-        textField.leftView = paddingLeft
+        let magnifyingGlassImage = UIImage(systemName: "magnifyingglass")
+        let magnifyingGlassView = UIImageView(image: magnifyingGlassImage)
+        magnifyingGlassView.backgroundColor = UIColor(named: "systemGray")
+        magnifyingGlassView.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        magnifyingGlassView.tintColor = UIColor.black
+        magnifyingGlassView.contentMode = .center
+        let paddingConstant = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        paddingConstant.addSubview(magnifyingGlassView)
+        textField.leftView = paddingConstant
         textField.leftViewMode = .always
     }
-    
-    
 }
 

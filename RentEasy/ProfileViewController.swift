@@ -35,21 +35,17 @@ class ProfileViewController: UIViewController {
             let lastName = userDetails.lastName
             let emailAddress = userDetails.emailAddress
             clientName.text = "\(firstName ?? "nil")  \(lastName ?? "nil")"
-        
             userEmailAddress.text = emailAddress
         }
     }
-    
     
     @IBAction func settingsButton(_ sender: UIButton) {
         print("Settings Pressed")
     }
     
-    
     @IBAction func paymentDetailsButton(_ sender: UIButton) {
         print("PaymentButtonPressed")
     }
-    
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Logout", message: "Are you sure?", preferredStyle: .alert)

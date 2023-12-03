@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
@@ -15,10 +16,12 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapToSafeArea: NSLayoutConstraint!
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var searchBarAppearance = SearchBarAppearance()
     let locationManager = CLLocationManager()
-    var searchedDataResult: [RentData] = []
+    var searchedDataResult: [RentDataEntity] = []
     var destinationVC: FilteredResultViewController?
+    var rentDataEntityProperty: [RentDataEntity] = []
     
     var detailData: String?
     
@@ -59,8 +62,6 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     }
     
     
-    
-    
     func presentLocation(_ location: CLLocation) {
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -84,13 +85,18 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         destinationVC?.tableView.reloadData()
     }
     
-    func filteredResults(for searchedData: String) -> [RentData] {
-        let resultData = property.filter { rentData in
-            return rentData.name.contains(searchedData) ||
-            rentData.address.contains(searchedData) ||
-            rentData.size.contains(searchedData)
+    func filteredResults(for searchedData: String) -> [RentDataEntity] {
+        
+        let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchedData)
+        request.predicate = predicate
+
+        do {
+            let resultData = try context.fetch(request)
+            return resultData
+        } catch {
+            return []
         }
-        return resultData
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -107,7 +113,6 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     func presentVC() {
         if let destinationVC = destinationVC {
             let searchedData = searchTextField.text
-            print("Searched Data \(searchedData ?? "")")
             let results = searchedDataResult
             print("Results Count \(results.count)")
             destinationVC.filteredRentData = results
@@ -125,19 +130,16 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         
     }
     
-    
     func filterButton() {
         let filterSymbol = UIImage(systemName: "slider.vertical.3")
         let filterButton = UIButton(type: .custom)
         filterButton.setImage(filterSymbol, for: .normal)
         filterButton.tintColor = UIColor.black
-        
         filterButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
         let paddingRight = UIView(frame: filterButton.frame)
         paddingRight.addSubview(filterButton)
         searchTextField.rightView = paddingRight
         searchTextField.rightViewMode = .always
-        
         filterButton.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
     }
     

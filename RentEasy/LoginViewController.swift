@@ -23,7 +23,6 @@ class LoginViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         //Animation
                loginLogoImg.alpha = 0
                loginLogoImg.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -35,26 +34,24 @@ class LoginViewController: UIViewController {
                    self.loginLogoImg.transform = .identity
                }, completion: nil)
         
-        //Button and TextField Styling
         button_FieldStyle.buttonShape(loginButton)
         button_FieldStyle.buttonShape(createAccountButton)
         button_FieldStyle.textFieldShape(usernameTextField)
         button_FieldStyle.textFieldShape(passwordTextField)
-        searchBarAppearance.secureEyeView(passwordTextField)
+        secureEye(passwordTextField)
      
     }
     
    
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        
         guard let username = usernameTextField.text, let password = passwordTextField.text else {return}
           guard !username.isEmpty, !password.isEmpty else {return}
         if dataModelManager.userLogin(emailAddress: username, password: password) {
                 performTabBarSegue()
             } else {
                 let alertController = UIAlertController(title: "Failed", message: "Try again", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default)
-                alertController.addAction(okAction)
+                let oK = UIAlertAction(title: "OK", style: .default)
+                alertController.addAction(oK)
                 present(alertController, animated: true, completion: nil)
             }
     }
@@ -65,6 +62,24 @@ class LoginViewController: UIViewController {
             present(tabBarVC, animated: true, completion: nil)
         }
     }
-
+    
+    func secureEye(_ textField: UITextField) {
+        let passwordImage = UIImage(systemName: "eye.slash")
+        let passwordImageButton = UIButton(type: .custom)
+        passwordImageButton.setImage(passwordImage, for: .normal)
+        passwordImageButton.tintColor = UIColor.black
+        passwordImageButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        let paddingRightConstant = UIView(frame: passwordImageButton.frame)
+        paddingRightConstant.addSubview(passwordImageButton)
+        textField.rightView = paddingRightConstant
+        textField.rightViewMode = .always
+        passwordImageButton.addTarget(self, action: #selector(secureEyePressed), for: .touchUpInside)
+    }
+    @objc func secureEyePressed(passwordButton: UIButton) {
+        passwordTextField.isSecureTextEntry.toggle()
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        let image = UIImage(systemName: imageName)
+        passwordButton.setImage(image, for: .normal)
+    }
 }
 

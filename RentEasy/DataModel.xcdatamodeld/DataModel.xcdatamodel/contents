@@ -3,13 +3,16 @@
     <entity name="RentDataEntity" representedClassName=".RentDataEntity" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="amount" optional="YES" attributeType="String"/>
+        <attribute name="bookedItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="itemHistoryStatus" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="postedItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="size" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="testimonies" optional="YES" attributeType="String"/>
     </entity>
     <entity name="UserDetails" representedClassName=".UserDetails" syncable="YES" codeGenerationType="class">
         <attribute name="emailAddress" optional="YES" attributeType="String"/>

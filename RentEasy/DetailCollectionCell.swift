@@ -12,6 +12,7 @@ class DetailCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
           super.awakeFromNib()
-        imageForCell.contentMode = .scaleAspectFit
+        imageForCell.contentMode = .scaleAspectFill
+        imageForCell.clipsToBounds = true
       }
 }
