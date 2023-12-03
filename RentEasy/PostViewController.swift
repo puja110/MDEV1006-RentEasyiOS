@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import MapKit
+
+struct AddressItem: Identifiable {
+    var id = UUID()
+    let longitude: String
+    let latitude: String
+}
 
 class PostViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -16,11 +23,41 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var propertyAddressField: UITextField!
     
+    @IBOutlet weak var suggestionButton: UIButton!
+    
+    @IBAction func onTouchSuggestion(_ sender: UIButton) {
+            propertyAddressField.text = suggestionButton.titleLabel?.text
+            suggestionButton.isHidden = true
+        
+    }
+    @IBAction func onSearchAddress(_ sender: UITextField) {
+        if(sender.text! == ""){
+            suggestionButton.isHidden = true
+            return
+            
+        }
+        searchAddress(sender.text!)
+        suggestionButton.isHidden = false
+    }
+    
     let imagePickerController = UIImagePickerController()
     var selectedImageData: Data?
+    private lazy var localSearchCompleter: MKLocalSearchCompleter = {
+            let completer = MKLocalSearchCompleter()
+            completer.delegate = self
+            return completer
+        }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        suggestionButton.setTitle("Search Suggestion Here", for: .normal)
+        suggestionButton.isHidden = true
+    }
     
-    override func viewDidLoad() {super.viewDidLoad()}
+    func searchAddress(_ searchableText: String) {
+        guard searchableText.isEmpty == false else { return }
+        localSearchCompleter.queryFragment = searchableText
+    }
     
     func uploadNewPicture() {
         let imagePicker = UIImagePickerController()
@@ -59,7 +96,6 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         return path[0]
     }
     
-    
     @IBAction func uploadButtonPressed(_ sender: UIButton) {
         uploadNewPicture()
     }
@@ -73,7 +109,11 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         else
         {return}
         
-        DataModelManager.shared.uploadRentDataEntity(name: name, address: address, amount: amount, size: size, newImage: selectedImageData)
+        Task {
+            let places = await getPlace(from: address)
+            DataModelManager.shared.uploadRentDataEntity(name: name, address: address, longitude: places.coordinate.longitude, latitude: places.coordinate.latitude, amount: amount, size: size, newImage: selectedImageData)
+        }
+        
         
         propetyNameField.text = ""
         propertyAddressField.text = ""
@@ -81,3 +121,31 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         propertySizeField.text = ""
     }
 }
+
+
+extension PostViewController: MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        Task { @MainActor in
+            let topResult = completer.results[0]
+            suggestionButton.setTitle(topResult.title + ", " + topResult.subtitle, for: .normal)
+        }
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func getPlace(from address: String) async -> MKPlacemark  {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = address
+        
+        do {
+            let response = try await MKLocalSearch(request: request).start()
+            return response.mapItems.first!.placemark
+        } catch {
+            // Handle errors appropriately
+            fatalError("Error in MKLocalSearch: \(error)")
+        }
+    }
+}
+

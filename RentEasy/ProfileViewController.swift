@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var settingView: UIView!
+    @IBOutlet weak var securityPrivacyView: UIView!
     @IBOutlet weak var paymentDetailsView: UIView!
     
     var buttonFieldStyle = Button_FieldStyle()
@@ -27,6 +28,7 @@ class ProfileViewController: UIViewController {
         
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         buttonFieldStyle.customButtonShape(settingView)
+        buttonFieldStyle.customButtonShape(securityPrivacyView)
         buttonFieldStyle.customButtonShape(paymentDetailsView)
         buttonFieldStyle.buttonShape(logoutButton)
         buttonFieldStyle.viewLine(profileDetailsStackView)

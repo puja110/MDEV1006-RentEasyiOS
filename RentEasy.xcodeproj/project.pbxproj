@@ -42,6 +42,7 @@
 		3DEA85402AFFC9F2007C3E78 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA853E2AFFC9F2007C3E78 /* DataModel.xcdatamodeld */; };
 		3DEA85652AFFDA76007C3E78 /* DataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA85642AFFDA76007C3E78 /* DataModelManager.swift */; };
 		3DEA85672B0030A8007C3E78 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA85662B0030A8007C3E78 /* UserInformation.swift */; };
+		7DEF4D5C2B1CD8C400EB9254 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEF4D5B2B1CD8C400EB9254 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		3DEA853F2AFFC9F2007C3E78 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3DEA85642AFFDA76007C3E78 /* DataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelManager.swift; sourceTree = "<group>"; };
 		3DEA85662B0030A8007C3E78 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
+		7DEF4D5B2B1CD8C400EB9254 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				3D75EA442AFEAE7F00714AE2 /* PostViewController.swift */,
 				3D958BD62B087CE10052555F /* CondoViewController.swift */,
 				3D958BD82B087EE40052555F /* HousesViewController.swift */,
+				7DEF4D5B2B1CD8C400EB9254 /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				3D90BBD12AE4665100488A7F /* ProfileViewController.swift in Sources */,
 				3D1A9A332AD348CA007A34DB /* SignUpViewController.swift in Sources */,
 				3D778F922AE2ED0E009085EC /* Button_FieldStyle.swift in Sources */,
+				7DEF4D5C2B1CD8C400EB9254 /* SettingsViewController.swift in Sources */,
 				3D958BD92B087EE40052555F /* HousesViewController.swift in Sources */,
 				3D1A9A372AD34911007A34DB /* VerifyEmailViewController.swift in Sources */,
 				3DBB4C7A2AD08C7B00B5ED8D /* SceneDelegate.swift in Sources */,
