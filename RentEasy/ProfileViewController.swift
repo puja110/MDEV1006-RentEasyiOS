@@ -43,6 +43,18 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let userDetails = DataModelManager.shared.fetchUserDetails() {
+            let firstName = userDetails.firstName
+            let lastName = userDetails.lastName
+            let emailAddress = userDetails.emailAddress
+            userFirstName.text = firstName
+            userLastName.text = lastName
+            userEmailAddress.text = emailAddress
+        }
+    }
+    
     
     @IBAction func settingsButton(_ sender: UIButton) {
         print("Settings Pressed")

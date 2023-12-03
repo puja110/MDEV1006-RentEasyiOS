@@ -42,8 +42,8 @@ class LoginViewController: UIViewController {
         button_FieldStyle.textFieldShape(passwordTextField)
         searchBarAppearance.secureEyeView(passwordTextField)
         
-        usernameTextField.text = "suyog@re.com"
-        passwordTextField.text = "test123"
+        usernameTextField.text = "s"
+        passwordTextField.text = "123"
     }
     
    
