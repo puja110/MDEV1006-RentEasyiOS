@@ -118,6 +118,40 @@ class DataModelManager {
         }
     }
     
+    //MARK: - USER PROFILE UPDATE
+    func userProfileUpdate(email: String, firstName: String, lastName: String, phoneNumber: String) {
+        let request: NSFetchRequest<UserDetails> = UserDetails.fetchRequest()
+        do {
+            let userInfo = try context.fetch(request)
+            for user in userInfo {
+                user.emailAddress = email
+                user.phoneNumber = phoneNumber
+                user.firstName = firstName
+                user.lastName = lastName
+            }
+            saveContext()
+        } catch {
+            print("Error Updating user: \(error)")
+        }
+        
+    }
+    
+    //MARK: - USER PASSWORD UPDATE
+    func userPasswordUpdate(password: String) {
+        let request: NSFetchRequest<UserDetails> = UserDetails.fetchRequest()
+        do {
+            let userInfo = try context.fetch(request)
+            for user in userInfo {
+                user.password = password
+            }
+            saveContext()
+        } catch {
+            print("Error Updating user password: \(error)")
+        }
+        
+    }
+
+    
     
     //MARK: - USER LOGIN
     func userLogin(emailAddress: String, password: String) -> Bool {
@@ -155,15 +189,19 @@ class DataModelManager {
     }
     
     //MARK: - UploadData
-    func uploadRentDataEntity(name: String, address: String, amount: String, size: String, newImage: Data?, description: String) {
+    func uploadRentDataEntity(name: String, address : String, longitude: Double, latitude: Double, amount: String, size: String, newImage: Data?) {
         let uploadData = RentDataEntity(context: context)
         uploadData.name = name
-        uploadData.address = address
         uploadData.amount = amount
         uploadData.size = size
         uploadData.image = newImage
         uploadData.itemDescription = description
         uploadData.postedItem = true
+        uploadData.address = address
+        uploadData.latitude = latitude
+        uploadData.longitude = longitude
+        uploadData.isFavorite = true
+        
         saveContext()
         print("Saved Successfully")
     }
