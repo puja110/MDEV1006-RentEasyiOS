@@ -189,7 +189,7 @@ class DataModelManager {
     }
     
     //MARK: - UploadData
-    func uploadRentDataEntity(name: String, address : String, longitude: Double, latitude: Double, amount: String, size: String, newImage: Data?) {
+    func uploadRentDataEntity(name: String, address : String, longitude: Double, latitude: Double, amount: String, size: String, newImage: Data?, description: String) {
         let uploadData = RentDataEntity(context: context)
         uploadData.name = name
         uploadData.amount = amount
@@ -200,7 +200,6 @@ class DataModelManager {
         uploadData.address = address
         uploadData.latitude = latitude
         uploadData.longitude = longitude
-        uploadData.isFavorite = true
         
         saveContext()
         print("Saved Successfully")

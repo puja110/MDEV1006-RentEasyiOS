@@ -47,8 +47,7 @@ class ProfileViewController: UIViewController {
             let firstName = userDetails.firstName
             let lastName = userDetails.lastName
             let emailAddress = userDetails.emailAddress
-            userFirstName.text = firstName
-            userLastName.text = lastName
+            clientName.text = "\(firstName ?? "nil")  \(lastName ?? "nil")"
             userEmailAddress.text = emailAddress
         }
     }

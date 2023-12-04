@@ -127,10 +127,9 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         else
         {return}
         
-        DataModelManager.shared.uploadRentDataEntity(name: name, address: address, amount: amount, size: size, newImage: selectedImageData, description: description)
         Task {
             let places = await getPlace(from: address)
-            DataModelManager.shared.uploadRentDataEntity(name: name, address: address, longitude: places.coordinate.longitude, latitude: places.coordinate.latitude, amount: amount, size: size, newImage: selectedImageData)
+            DataModelManager.shared.uploadRentDataEntity(name: name, address: address, longitude: places.coordinate.longitude, latitude: places.coordinate.latitude, amount: amount, size: size, newImage: selectedImageData, description: description)
         }
         
         
@@ -172,7 +171,6 @@ extension PostViewController: MKLocalSearchCompleterDelegate {
             let response = try await MKLocalSearch(request: request).start()
             return response.mapItems.first!.placemark
         } catch {
-            // Handle errors appropriately
             fatalError("Error in MKLocalSearch: \(error)")
         }
     }
