@@ -84,8 +84,8 @@ class DataModelManager {
     
     func sliderAmountSearch(sliderAmount: Int) -> [RentDataEntity] {
         let fetchRequest: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "amount == %@", argumentArray: [sliderAmount])
-        
+        fetchRequest.predicate = NSPredicate(format: "amount <= %@", String(sliderAmount))
+
         do {
             let fetchedResults = try context.fetch(fetchRequest)
             return fetchedResults
@@ -94,7 +94,6 @@ class DataModelManager {
             return []
         }
     }
-    
     //MARK: - DELETING ITEMS
     func deleteItem(_ item: RentDataEntity) {
         context.delete(item)

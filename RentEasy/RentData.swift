@@ -55,7 +55,7 @@ struct RentData {
     
         RentData(name: "Student Shared room", amount: "1300", address: "Alliston", image: UIImage(imageLiteralResourceName: "houseFive"), status: "Available", size: "Four Bedroom", testimonies: [RentData.Testimony(name: "Manushi Khadka", comment: "Beautiful Home. Nice Place to live")]),
     
-    RentData(name: "Shared Home", amount: "$1100", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseOne"), status: "Available", size: "Four bedroom Duplex", testimonies: [RentData.Testimony(name: "Manushi Khadka", comment: "Beautiful Home. Nice Place to live")]),
+    RentData(name: "Shared Home", amount: "1100", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseOne"), status: "Available", size: "Four bedroom Duplex", testimonies: [RentData.Testimony(name: "Manushi Khadka", comment: "Beautiful Home. Nice Place to live")]),
     
     RentData(name: "Single basement room", amount: "3000", address: "Barrie", image: UIImage(imageLiteralResourceName: "houseSeven"), status: "Available", size: "Two Bedroom", testimonies: [RentData.Testimony(name: "Name Name", comment: "Beautiful Home. Nice Place to live"), RentData.Testimony(name: "Name Name", comment: "Beautiful Home. Nice Place to live"),RentData.Testimony(name: "Name Name", comment: "Beautiful Home. Nice Place to live")]),
     

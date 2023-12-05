@@ -67,6 +67,7 @@ extension FavoriteTableViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! RentCell
         let favoriteHouses = rentDataEntityProperty[indexPath.row]
         cell.propertyName.text = favoriteHouses.name
+        cell.houses = favoriteHouses
         if let imageData = favoriteHouses.image {
             if let image = UIImage(data: imageData) {
                 cell.propertyImage.image = image

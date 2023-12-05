@@ -11,8 +11,6 @@ class SearchFilterView: UIViewController {
 
     @IBOutlet weak var popUpStack: UIStackView!
     @IBOutlet weak var popBackgroundView: UIView!
-    @IBOutlet weak var bathroomsButton: UIButton!
-    @IBOutlet weak var bedroomButton: UIButton!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var sliderPriceRange: UISlider!
     

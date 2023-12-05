@@ -112,7 +112,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     //MARK: - BOTTOM SHEET
     func presentVC() {
         if let destinationVC = destinationVC {
-            let searchedData = searchTextField.text
+            _ = searchTextField.text
             let results = searchedDataResult
             print("Results Count \(results.count)")
             destinationVC.filteredRentData = results
