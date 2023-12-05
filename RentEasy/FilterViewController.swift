@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
+class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,7 +22,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     var searchedDataResult: [RentDataEntity] = []
     var destinationVC: FilteredResultViewController?
     var rentDataEntityProperty: [RentDataEntity] = []
-    
+    var selectedProperty: RentDataEntity?
     var detailData: String?
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
             .instantiateViewController(withIdentifier: "FilteredResult") as? FilteredResultViewController
         navigationItem.title = "Search"
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        rentDataEntityProperty = DataModelManager.shared.loadAllItems()
         searchTextField.delegate = self
         searchBarAppearance.magnifyingGlassOnly(searchTextField)
         filterButton()
@@ -41,38 +41,59 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     
     
     //MARK: - Location configuration
-    func locationService() {
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        let setLatitude = 44.389355
+        let setLongitude = -79.690331
+        let serviceLocation = CLLocationCoordinate2D(latitude: setLatitude, longitude: setLongitude)
+        let serviceRegion = MKCoordinateRegion(center: serviceLocation, latitudinalMeters: 3000, longitudinalMeters: 3000)
+        mapView.setRegion(serviceRegion, animated: true)
+        
+    }
+    
+    func locationService() {
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             manager.stopUpdatingLocation()
-            presentLocation(location)
+            if let selectedProperty = selectedProperty {
+                let coordinate = CLLocationCoordinate2D(latitude: selectedProperty.latitude, longitude: selectedProperty.longitude)
+                let pin = MKPointAnnotation()
+                pin.coordinate = coordinate
+                mapView.addAnnotation(pin)
+            } else {
+                presentLocation(location)
+                rentDataEntityLocations()
+            }
         }
     }
     
-    
     func presentLocation(_ location: CLLocation) {
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: coordinate, span: span)
-        mapView.setRegion(region, animated: true)
         let pin = MKPointAnnotation()
         pin.coordinate = coordinate
         mapView.addAnnotation(pin)
     }
-
     
+    func rentDataEntityLocations() {
+        for houses in rentDataEntityProperty {
+            let houseLatitude = houses.latitude
+            let houseLongitude = houses.longitude
+            let houseLocation = CLLocationCoordinate2D(latitude: houseLatitude, longitude: houseLongitude)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = houseLocation
+            mapView.addAnnotation(annotation)
+        }
+    }
+        
     //MARK: - SEARCH IMPLEMENTATION
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let searchedData = (textField.text! as NSString).replacingCharacters(in: range, with: string)
@@ -86,11 +107,9 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     }
     
     func filteredResults(for searchedData: String) -> [RentDataEntity] {
-        
         let request: NSFetchRequest<RentDataEntity> = RentDataEntity.fetchRequest()
         let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchedData)
         request.predicate = predicate
-
         do {
             let resultData = try context.fetch(request)
             return resultData
@@ -114,10 +133,8 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         if let destinationVC = destinationVC {
             _ = searchTextField.text
             let results = searchedDataResult
-            print("Results Count \(results.count)")
             destinationVC.filteredRentData = results
             destinationVC.modalPresentationStyle = .automatic
-            
             if let bottomSheet = destinationVC.presentationController as? UISheetPresentationController {
                 bottomSheet.detents = [.medium(), .large()]
                 bottomSheet.largestUndimmedDetentIdentifier = .medium
@@ -131,9 +148,9 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
     }
     
     func filterButton() {
-        let filterSymbol = UIImage(systemName: "slider.vertical.3")
+        let filterImage = UIImage(systemName: "slider.vertical.3")
         let filterButton = UIButton(type: .custom)
-        filterButton.setImage(filterSymbol, for: .normal)
+        filterButton.setImage(filterImage, for: .normal)
         filterButton.tintColor = UIColor.black
         filterButton.frame = CGRect(x: 0, y: 0, width: 40, height: 50)
         let paddingRight = UIView(frame: filterButton.frame)
@@ -150,8 +167,6 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
                 let navigationController = UINavigationController(rootViewController: searchFilter)
                 navigationController.modalPresentationStyle = .popover
                 self.present(navigationController, animated: true)
-            } else {
-               // DO NOTHING
             }
         }
     }

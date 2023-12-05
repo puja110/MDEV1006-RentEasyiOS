@@ -19,8 +19,7 @@ class SearchFilterView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        destinationVC = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "FilteredResult") as? FilteredResultViewController
+        destinationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilteredResult") as? FilteredResultViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {

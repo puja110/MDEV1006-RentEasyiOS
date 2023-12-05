@@ -18,7 +18,6 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
     @IBOutlet weak var firstStackView: UIStackView!
     @IBOutlet weak var secondStackView: UIStackView!
     @IBOutlet weak var thirdStackView: UIStackView!
-    @IBOutlet weak var bookButton: UIButton!
     @IBOutlet weak var fourthStackView: UIStackView!
     @IBOutlet weak var fifthStackView: UIStackView!
     
@@ -56,18 +55,12 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
         collectionViewMain.register(DetailCollectionCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionViewMain.delegate = self
         collectionViewMain.dataSource = self
-        
-        if selectedItem?.bookedItem == true {
-            bookButton.isEnabled = false
-            bookButton.setTitle("Not Available", for: .normal)
-        } else {
-            bookButton.isEnabled = true            
-        }
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         let destinationVC = UIStoryboard(name: "Main", bundle: nil)
         if let filterViewController = destinationVC.instantiateViewController(withIdentifier: "FilterView") as? FilterViewController {
+            filterViewController.selectedProperty = selectedItem
             filterViewController.view.backgroundColor = UIColor.systemGray5
             filterViewController.searchTextField.isHidden = true
             filterViewController.mapToSafeArea.constant = 10
@@ -79,8 +72,6 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
                 filterViewController.navigationItem.rightBarButtonItem = button
                 navigationController.modalPresentationStyle = .popover
                 self.present(navigationController, animated: true)
-            } else {
-               // DO NOTHING
             }
         }
     }
@@ -101,17 +92,6 @@ class DetailPageViewController: UIViewController, UIViewControllerTransitioningD
         let shareMessage = "Check out this beautiful \(name ?? "nil") in \(address ?? "nil")"
         let activity = UIActivityViewController(activityItems: [shareMessage, propertyToShare.image as Any], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
-    }
-    
-    @IBAction func bookingButtonPressed(_ sender: UIButton) {
-        presentAlert()
-    }
-    
-    func presentAlert() {
-        let customAlert = CustomAlert(nibName: "CustomAlert", bundle: nil)
-        customAlert.houses = selectedItem
-        customAlert.modalPresentationStyle = .overCurrentContext
-        present(customAlert, animated: true, completion: nil)
     }
 }
 

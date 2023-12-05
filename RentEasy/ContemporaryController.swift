@@ -44,13 +44,7 @@ extension ContemporaryController: UITableViewDataSource {
         }
         cell.propertyAmount.text = "$\(houses.amount ?? "1000") /month"
         cell.propertyAddress.text = houses.address
-        if houses.bookedItem == true {
-            cell.rentStatus.textColor = UIColor.red
-            cell.rentStatus.text = "Booked"
-        } else {
-            cell.rentStatus.textColor = UIColor.green
-            cell.rentStatus.text = "Available"
-        }
+        cell.rentStatus.text = houses.status ?? "Available"
         cell.propertySize.text = houses.size
         cell.favoriteButton.isSelected = houses.isFavorite
         cell.updateButtonImage(isFavorite: houses.isFavorite)

@@ -18,7 +18,6 @@ class FavoriteTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         rentDataEntityProperty = DataModelManager.shared.loadFavouriteItems()
         tableView.reloadData()

@@ -23,7 +23,5 @@ class VerifyEmailViewController: UIViewController {
         button_FieldStyle.textFieldShape(getCodeTextField)
         button_FieldStyle.buttonShape(getCodeButton)
         button_FieldStyle.buttonShape(verifyButton)
-        
-        
     }
 }

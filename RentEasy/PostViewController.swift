@@ -136,7 +136,7 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
               !description.isEmpty,
               agreedToTerms
         else {
-            confirmationAlert(message: "All fields must be filled.")
+            confirmationAlert(message: "Fill Empty Fields.")
             return
         }
         

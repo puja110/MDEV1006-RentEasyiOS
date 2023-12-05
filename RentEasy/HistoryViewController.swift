@@ -28,10 +28,8 @@ class HistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         allHistoryData = DataModelManager.shared.loadPostedItems()
         availableHistoryData = DataModelManager.shared.loadPostedItems()
-        bookedHistoryData = DataModelManager.shared.loadBookedItems()
-        allHistoryData = availableHistoryData + bookedHistoryData
+        allHistoryData = availableHistoryData
         currentDataSource = allHistoryData
-        print(bookedHistoryData.count)
         tableView.reloadData()
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -43,7 +41,6 @@ class HistoryViewController: UIViewController {
         buttonTextField.changeButtonAppearance(myButton: allButton)
         buttonTextField.changeButtonAppearance(myButton: availableButton)
         buttonTextField.changeButtonAppearance(myButton: bookedButton)
-        tableView.reloadData()
         tableView.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
     }
     
@@ -83,6 +80,7 @@ extension HistoryViewController: UITableViewDelegate {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
 }
 
 extension HistoryViewController: UITableViewDataSource {
@@ -98,13 +96,7 @@ extension HistoryViewController: UITableViewDataSource {
         cell.houseAddress.text = houses.address
         cell.houseSize.text = houses.size
         cell.houseAmount.text = "$\(houses.amount ?? "500") /month"
-        if (houses.status != nil) == true {
-            cell.houseStatus.text = "Booked"
-            cell.houseStatus.textColor = UIColor.red
-        } else {
-            cell.houseStatus.textColor = UIColor.green
-            cell.houseStatus.text = "Available"
-        }
+        cell.houseStatus.text = houses.status ?? "Available"
         
         if let imageData = houses.image {
             if let image = UIImage(data: imageData) {

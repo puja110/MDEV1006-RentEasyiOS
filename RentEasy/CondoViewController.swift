@@ -69,15 +69,7 @@ extension CondoViewController: UITableViewDataSource {
         } else {
             cell.propertyImage.image = nil
         }
-        
-        if houses.bookedItem == true {
-            cell.rentStatus.textColor = UIColor.red
-            cell.rentStatus.text = "Booked"
-        } else {
-            cell.rentStatus.textColor = UIColor.green
-            cell.rentStatus.text = "Available"
-        }
-        
+        cell.rentStatus.text = houses.status ?? "Available"
         cell.propertyAmount.text = "$\(houses.amount ?? "1000") /month"
         cell.propertyAddress.text = houses.address
         cell.propertySize.text = houses.size
