@@ -1,2 +1,0 @@
-# RentEasyIOS
-Accommodation Rental App
