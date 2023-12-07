@@ -154,16 +154,17 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         propertySizeField.text = ""
         descriptionField.text = ""
         resetImages()
-        successfulAlert()    }
+        successfulAlert()
+    }
     
-    private func successfulAlert() {
+     func successfulAlert() {
         let alertController = UIAlertController(title: "Upload Successful", message: nil, preferredStyle: .alert)
         let oK = UIAlertAction(title: "OK", style: .destructive)
         alertController.addAction(oK)
         present(alertController, animated: true, completion: nil)
     }
     
-    private func confirmationAlert(message: String) {
+     func confirmationAlert(message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)

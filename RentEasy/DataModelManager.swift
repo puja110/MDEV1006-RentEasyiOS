@@ -20,7 +20,7 @@ class DataModelManager {
         do {
             try context.save()
         } catch {
-            print("Error saving: \(error)")
+            print("Error saving")
         }
     }
     

@@ -96,12 +96,13 @@ class FilterViewController: UIViewController, CLLocationManagerDelegate, UITextF
         
     //MARK: - SEARCH IMPLEMENTATION
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let searchedData = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        guard let typedText = textField.text else {return true}
+        let searchedData = typedText.replacingCharacters(in: Range(range, in: typedText)!, with: string)
         searchedDataResult = filteredResults(for: searchedData)
         destinationVC?.filteredRentData = searchedDataResult
         return true
     }
-    
+
     func reloadTableView() {
         destinationVC?.tableView.reloadData()
     }
